@@ -1,0 +1,189 @@
+{% extends "_base.html" %}
+
+{% block title %}What Kind of Food Do You Sell? — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}?v=3" />
+{% endblock %}
+
+{% block content %}
+<div class="reg-page">
+
+  <!-- ── Progress stepper ── -->
+  <div class="reg-stepper">
+    <div class="reg-stepper__inner">
+      <div class="reg-stepper__step active">Profile</div>
+      <div class="reg-stepper__step">Details</div>
+      <div class="reg-stepper__step">Documents</div>
+      <div class="reg-stepper__step">Review</div>
+    </div>
+  </div>
+
+  <!-- ── Top nav ── -->
+  <div class="reg-topnav">
+    <a href="/about-business" class="reg-back-btn">&larr; Back</a>
+    <a href="/" class="reg-home-btn">&#127968; Home</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="reg-content">
+    <h1 class="reg-title">What kind of food do you sell? &#127850;</h1>
+    <p class="reg-sub">Pick everything on your menu &mdash; we&rsquo;ll use this to match you to the right category.</p>
+
+    <div class="reg-card-grid reg-card-grid--4" id="foodTypeGrid">
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="dairy-analogues">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129371;</span>
+        <div class="reg-card__title">Dairy &amp; Analogues</div>
+        <p class="reg-card__sub">Milk, paneer, cream, ghee</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="fats-oils">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129371;</span>
+        <div class="reg-card__title">Fats &amp; Oils</div>
+        <p class="reg-card__sub">Cooking oils, butter, emulsions</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="edible-ices">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127846;</span>
+        <div class="reg-card__title">Edible Ices</div>
+        <p class="reg-card__sub">Ice cream, kulfi, sherbet</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="fruits-vegetables">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129382;</span>
+        <div class="reg-card__title">Fruits &amp; Vegetables</div>
+        <p class="reg-card__sub">Fresh, dried, pickled, nuts, seeds</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="confectionery">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127852;</span>
+        <div class="reg-card__title">Confectionery</div>
+        <p class="reg-card__sub">Sweets, chocolates, candy</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="cereals-grains">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127807;</span>
+        <div class="reg-card__title">Cereals &amp; Grains</div>
+        <p class="reg-card__sub">Rice, wheat, pulses, flour</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="bakery-products">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129360;</span>
+        <div class="reg-card__title">Bakery Products</div>
+        <p class="reg-card__sub">Bread, biscuits, cakes, rusk</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="meat-poultry">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127831;</span>
+        <div class="reg-card__title">Meat &amp; Poultry</div>
+        <p class="reg-card__sub">Chicken, mutton, processed meats</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="fish-seafood">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#128032;</span>
+        <div class="reg-card__title">Fish &amp; Seafood</div>
+        <p class="reg-card__sub">Fish, prawns, crustaceans</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="eggs-egg-products">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129370;</span>
+        <div class="reg-card__title">Eggs &amp; Egg Products</div>
+        <p class="reg-card__sub">Table eggs, processed egg</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="sweeteners-honey">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127855;</span>
+        <div class="reg-card__title">Sweeteners &amp; Honey</div>
+        <p class="reg-card__sub">Sugar, jaggery, honey, syrups</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="salts-spices-sauces">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127798;&#65039;</span>
+        <div class="reg-card__title">Salts, Spices &amp; Sauces</div>
+        <p class="reg-card__sub">Masala, pickles, chutneys</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="special-nutritional">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127868;</span>
+        <div class="reg-card__title">Special Nutritional Foods</div>
+        <p class="reg-card__sub">Baby food, health supplements</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="beverages">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129379;</span>
+        <div class="reg-card__title">Beverages</div>
+        <p class="reg-card__sub">Juices, soft drinks, tea, coffee</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="ready-to-eat-savouries">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129369;</span>
+        <div class="reg-card__title">Ready-to-Eat Savouries</div>
+        <p class="reg-card__sub">Namkeen, papads, chips, farsan</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="prepared-foods">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129368;</span>
+        <div class="reg-card__title">Prepared Foods</div>
+        <p class="reg-card__sub">Cooked meals, curries, rice dishes</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="indian-sweets-snacks">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127857;</span>
+        <div class="reg-card__title">Indian Sweets &amp; Snacks</div>
+        <p class="reg-card__sub">Mithai, chakli, laddoo, barfi</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="food-additives">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129514;</span>
+        <div class="reg-card__title">Food Additives</div>
+        <p class="reg-card__sub">Preservatives, colour, flavour</p>
+      </label>
+
+    </div>
+
+    <p class="reg-error" id="foodTypeError"></p>
+    <button class="reg-btn-cta" id="foodTypeContinueBtn">That is my menu, continue &rarr;</button>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/registration.js') }}?v=7"></script>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "_base.html" %}
+{% block title %}Purpose — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab active">LOCATION</span>
+    <span class="tl-rail__tab">DOCS</span>
+    <span class="tl-rail__tab">FOOD</span>
+    <span class="tl-rail__tab">RULES</span>
+    <span class="tl-rail__tab">LICENSE</span>
+    <span class="tl-rail__tab">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/temp-license" class="tl-back">← Back</a>
+      <span class="tl-step-badge tl-step-badge--amber">Step 2 of 8 — Purpose</span>
+    </div>
+
+    <h1 class="tl-title">What is this license for? 📋</h1>
+    <p class="tl-subtitle">Help us understand your purpose so we can issue the right license with the right validity.</p>
+
+    <div class="tl-purpose-cards">
+      <div class="tl-purpose-card" data-purpose="stall" data-days="30">
+        <div class="tl-purpose-card__icon">🏚️</div>
+        <div class="tl-purpose-card__body">
+          <div class="tl-purpose-card__title">Stall / Event (1 Month)</div>
+          <div class="tl-purpose-card__desc">Setting up a stall for a festival, event, or one-time occasion. <strong>Valid for 30 days</strong> — no follow-up conversion required.</div>
+          <div class="tl-purpose-card__tags">
+            <span class="tl-purpose-tag tl-purpose-tag--green">30-day license</span>
+            <span class="tl-purpose-tag tl-purpose-tag--green">No conversion needed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-purpose-card" data-purpose="business" data-days="60">
+        <div class="tl-purpose-card__icon">🏗️</div>
+        <div class="tl-purpose-card__body">
+          <div class="tl-purpose-card__title">Business Setup (60 Days)</div>
+          <div class="tl-purpose-card__desc">Starting a permanent food business. Receive a <strong>60-day temporary license</strong> while you complete full compliance and get a permanent license.</div>
+          <div class="tl-purpose-card__tags">
+            <span class="tl-purpose-tag tl-purpose-tag--amber">60-day license</span>
+            <span class="tl-purpose-tag tl-purpose-tag--amber">Convert to permanent</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="tl-btn-primary tl-btn-full" id="purposeContinue" disabled>Continue →</button>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_purpose.js') }}"></script>
+{% endblock %}

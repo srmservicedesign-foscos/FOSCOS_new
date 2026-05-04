@@ -1,0 +1,200 @@
+{% extends "officer/_base.html" %}
+{% block title %}Temp Licenses — FOSCOS Officer Portal{% endblock %}
+{% block nav_temp_licenses %}active{% endblock %}
+
+{% block content %}
+<div class="officer-page-header">
+  <div>
+    <h1 class="officer-page-title">Temporary Licenses</h1>
+    <p class="officer-page-sub">Track active temp license holders, compliance deadlines, and schedule inspections</p>
+  </div>
+  <div class="officer-header-actions">
+    <span class="officer-date-badge" id="tlDate"></span>
+  </div>
+</div>
+
+<!-- ── Summary stats ── -->
+<div class="officer-stat-grid" style="margin-bottom:24px;">
+  <div class="officer-stat-card">
+    <div class="officer-stat-card__icon officer-stat-card__icon--blue">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+    </div>
+    <div class="officer-stat-card__body">
+      <div class="officer-stat-card__value" id="tlStatTotal">—</div>
+      <div class="officer-stat-card__label">Total Issued</div>
+    </div>
+  </div>
+  <div class="officer-stat-card">
+    <div class="officer-stat-card__icon officer-stat-card__icon--green">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="officer-stat-card__body">
+      <div class="officer-stat-card__value" id="tlStatActive">—</div>
+      <div class="officer-stat-card__label">Active</div>
+    </div>
+  </div>
+  <div class="officer-stat-card">
+    <div class="officer-stat-card__icon officer-stat-card__icon--amber">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <div class="officer-stat-card__body">
+      <div class="officer-stat-card__value" id="tlStatExpiring">—</div>
+      <div class="officer-stat-card__label">Expiring ≤ 14 days</div>
+    </div>
+  </div>
+  <div class="officer-stat-card">
+    <div class="officer-stat-card__icon officer-stat-card__icon--red">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    </div>
+    <div class="officer-stat-card__body">
+      <div class="officer-stat-card__value" id="tlStatExpired">—</div>
+      <div class="officer-stat-card__label">Expired</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Filters ── -->
+<div class="officer-filters-bar">
+  <input class="officer-search-input" type="text" id="tlSearch" placeholder="Search by license no, name, or phone..." />
+  <select class="officer-filter-select" id="tlFilterStatus">
+    <option value="">All Licenses</option>
+    <option value="active">Active</option>
+    <option value="expiring">Expiring ≤ 14 days</option>
+    <option value="expired">Expired</option>
+  </select>
+  <select class="officer-filter-select" id="tlFilterCompliance">
+    <option value="">All Compliance</option>
+    <option value="complete">All 3 done</option>
+    <option value="partial">Partially done</option>
+    <option value="none">None done</option>
+  </select>
+  <button class="officer-filter-clear" id="tlFilterClear">Clear filters</button>
+</div>
+
+<!-- ── Table ── -->
+<div class="officer-card">
+  <div class="officer-table-wrap">
+    <table class="officer-table" id="tlTable">
+      <thead>
+        <tr>
+          <th>License No</th>
+          <th>Operator</th>
+          <th>Purpose</th>
+          <th>Issued</th>
+          <th>Deadline</th>
+          <th>Compliance</th>
+          <th>Inspection</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tlTableBody">
+        <tr><td colspan="8" class="officer-table__empty">Loading temp licenses...</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="officer-table-footer">
+    <span id="tlCount" class="officer-table-count"></span>
+  </div>
+</div>
+
+<!-- ── Detail modal ── -->
+<div class="officer-modal-overlay" id="tlDetailOverlay">
+  <div class="officer-modal officer-modal--tl" id="tlDetailModal">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;">
+      <div class="officer-modal__title" id="tlModalTitle">License Detail</div>
+      <button onclick="closeDetail()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#94a3b8;line-height:1;">×</button>
+    </div>
+
+    <!-- Operator info -->
+    <div class="tl-detail-section">
+      <div class="tl-detail-section__title">Operator</div>
+      <div class="tl-detail-grid">
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Name</div><div class="tl-detail-item__val" id="dlName">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Phone</div><div class="tl-detail-item__val" id="dlPhone">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Area / District</div><div class="tl-detail-item__val" id="dlArea">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Setup Type</div><div class="tl-detail-item__val" id="dlSetup">—</div></div>
+      </div>
+    </div>
+
+    <!-- License info -->
+    <div class="tl-detail-section">
+      <div class="tl-detail-section__title">License</div>
+      <div class="tl-detail-grid">
+        <div class="tl-detail-item"><div class="tl-detail-item__label">License No</div><div class="tl-detail-item__val" id="dlLicNo">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Purpose</div><div class="tl-detail-item__val" id="dlPurpose">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Issued</div><div class="tl-detail-item__val" id="dlIssued">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Expires</div><div class="tl-detail-item__val" id="dlExpires">—</div></div>
+      </div>
+    </div>
+
+    <!-- Foods -->
+    <div class="tl-detail-section">
+      <div class="tl-detail-section__title">Food Categories</div>
+      <div id="dlFoods">—</div>
+    </div>
+
+    <!-- Documents -->
+    <div class="tl-detail-section">
+      <div class="tl-detail-section__title">KYC Documents</div>
+      <div class="tl-detail-grid">
+        <div class="tl-detail-item"><div class="tl-detail-item__label">ID Proof</div><div class="tl-detail-item__val" id="dlIdProof">—</div></div>
+        <div class="tl-detail-item"><div class="tl-detail-item__label">Establishment Proof</div><div class="tl-detail-item__val" id="dlEstProof">—</div></div>
+      </div>
+    </div>
+
+    <!-- Setup Photos -->
+    <div class="tl-detail-section" id="dlPhotosSection" style="display:none;">
+      <div class="tl-detail-section__title">Setup Photos</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;" id="dlPhotosWrap"></div>
+    </div>
+
+    <!-- Compliance actions -->
+    <div class="tl-detail-section">
+      <div class="tl-detail-section__title">Compliance Tasks</div>
+
+      <div class="tl-comp-row">
+        <div class="tl-comp-row__left">
+          <span>🧪</span> Water Quality Report
+        </div>
+        <button class="tl-comp-action" id="dlWaterBtn" onclick="markCompliance('water')">Mark Done</button>
+      </div>
+
+      <div class="tl-comp-row">
+        <div class="tl-comp-row__left">
+          <span>📚</span> FoSTaC Training
+        </div>
+        <button class="tl-comp-action" id="dlFostacBtn" onclick="markCompliance('fostac')">Mark Done</button>
+      </div>
+
+      <div class="tl-comp-row" style="flex-wrap:wrap;gap:8px;">
+        <div class="tl-comp-row__left">
+          <span>🔍</span> Inspection
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;">
+          <button class="tl-comp-action" id="dlInspBtn" onclick="markCompliance('inspection')">Mark Done</button>
+          <div class="tl-insp-date-wrap">
+            <input type="date" id="dlInspDate" />
+            <button class="tl-comp-action tl-comp-action--sched" onclick="scheduleInspection()">Schedule</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-comp-row" style="border-bottom:none;padding-top:14px;">
+        <div class="tl-comp-row__left">
+          <span>🔔</span> Send Reminder SMS
+        </div>
+        <button class="tl-comp-action tl-comp-action--remind" id="dlReminderBtn" onclick="sendReminder()">Send</button>
+      </div>
+    </div>
+
+    <div class="officer-modal__footer" style="margin-top:8px;">
+      <button class="officer-modal__cancel" onclick="closeDetail()">Close</button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/officer_temp_licenses.js') }}"></script>
+{% endblock %}

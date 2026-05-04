@@ -1,0 +1,106 @@
+{% extends "_base.html" %}
+
+{% block title %}Payment — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="payment-page">
+  <div class="payment-card">
+
+    <!-- Default view -->
+    <div id="paymentDefault">
+      <div class="payment-card__icon">🔒</div>
+      <div class="payment-card__title">Secure Payment</div>
+      <div class="payment-card__sub">Your application fee is collected securely through the FSSAI payment gateway.</div>
+
+      <div class="payment-section-label">License Fee</div>
+      <div id="paymentSummaryRows"></div>
+
+      <div id="paymentAddonsSection" style="display:none;">
+        <div class="payment-section-label payment-section-label--addon">One Stop Shop Add-ons</div>
+        <div id="paymentAddonRows"></div>
+      </div>
+
+      <div class="payment-total-row">
+        <span>Total</span>
+        <span id="payTotalAmount">&#8377; &mdash;</span>
+      </div>
+
+      <!-- Payment method selection -->
+      <div class="payment-methods-wrap">
+        <div class="payment-section-label" style="margin-bottom:12px;">Payment Method</div>
+        <div class="payment-method-rows">
+          <label class="payment-method-row selected">
+            <input type="radio" name="payMethod" value="upi" checked />
+            <span class="payment-method-row__icon">📱</span>
+            <div>
+              <div class="payment-method-row__label">UPI</div>
+              <div class="payment-method-row__sub">Google Pay, PhonePe, BHIM, Paytm</div>
+            </div>
+          </label>
+          <label class="payment-method-row">
+            <input type="radio" name="payMethod" value="netbanking" />
+            <span class="payment-method-row__icon">🏦</span>
+            <div>
+              <div class="payment-method-row__label">Net Banking</div>
+              <div class="payment-method-row__sub">All major Indian banks</div>
+            </div>
+          </label>
+          <label class="payment-method-row">
+            <input type="radio" name="payMethod" value="card" />
+            <span class="payment-method-row__icon">💳</span>
+            <div>
+              <div class="payment-method-row__label">Debit / Credit Card</div>
+              <div class="payment-method-row__sub">Visa, Mastercard, RuPay</div>
+            </div>
+          </label>
+          <label class="payment-method-row">
+            <input type="radio" name="payMethod" value="wallet" />
+            <span class="payment-method-row__icon">👛</span>
+            <div>
+              <div class="payment-method-row__label">Wallet</div>
+              <div class="payment-method-row__sub">Paytm Wallet, Amazon Pay</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <p class="reg-error" id="payError"></p>
+      <button class="reg-btn-cta" id="payNowBtn" style="width:100%;">Pay Now →</button>
+      <p class="payment-ssl-note">🔒 256-bit SSL &nbsp;·&nbsp; Simulated payment — no real charge will be made.</p>
+    </div>
+
+    <!-- Processing overlay -->
+    <div class="payment-processing" id="paymentProcessing">
+      <div class="payment-spinner"></div>
+      <div style="font-size:15px;font-weight:600;color:var(--navy);margin-bottom:20px;">Processing payment…</div>
+      <div class="payment-steps">
+        <div class="payment-step" id="pstep1">
+          <div class="pstep-dot"></div>
+          <span>Connecting to FSSAI Gateway</span>
+        </div>
+        <div class="payment-step" id="pstep2">
+          <div class="pstep-dot"></div>
+          <span>Verifying payment details</span>
+        </div>
+        <div class="payment-step" id="pstep3">
+          <div class="pstep-dot"></div>
+          <span>Generating application ID</span>
+        </div>
+        <div class="payment-step" id="pstep4">
+          <div class="pstep-dot"></div>
+          <span>Finalising submission</span>
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-top:20px;">Please do not close this window.</div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/payment.js') }}"></script>
+{% endblock %}

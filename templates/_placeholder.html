@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ page_name }} — FOSCOS</title>
+  <style>
+    :root { --amber: #c8813a; --navy: #1c2b4a; --cream: #faf7ed; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+      background: var(--cream); color: var(--navy);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      min-height: 100vh; gap: 12px; padding: 24px;
+    }
+    .label {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--amber);
+    }
+    .page-name { font-size: 24px; font-weight: 600; }
+    .page-id {
+      font-family: 'Courier New', monospace; font-size: 13px; color: #64748b;
+      background: #f0eada; padding: 8px 20px;
+      border-radius: 8px; border: 1px solid #e0d8c8;
+    }
+    .back {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--amber); font-size: 14px; font-weight: 500;
+      margin-top: 8px; padding: 10px 20px;
+      border: 1px solid var(--amber); border-radius: 8px;
+      text-decoration: none; transition: background .15s;
+    }
+    .back:hover { background: rgba(200,129,58,0.08); }
+  </style>
+</head>
+<body>
+  <span class="label">FOSCOS — Placeholder</span>
+  <h1 class="page-name">{{ page_name }}</h1>
+  <code class="page-id">→ {{ page_id }}</code>
+  {% if show_back is not defined or show_back %}
+  <a href="javascript:history.back()" class="back">← Back</a>
+  {% endif %}
+</body>
+</html>

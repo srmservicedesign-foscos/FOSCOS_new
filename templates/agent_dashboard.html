@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+{% block title %}Agent Dashboard — FoSCoS{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent_portal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <div class="agent-container">
+
+    <div class="agent-page-header">
+      <div class="agent-page-header__left">
+        <p style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin:0 0 2px;">Agent Portal</p>
+        <h1>Welcome, Agent 🤝</h1>
+      </div>
+      <a href="/" class="agent-home-btn">🏠 Home</a>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="agent-stats">
+      <div class="agent-stat agent-stat--navy">
+        <div class="agent-stat__val">6</div>
+        <div class="agent-stat__label">Total Clients</div>
+      </div>
+      <div class="agent-stat agent-stat--amber">
+        <div class="agent-stat__val">2</div>
+        <div class="agent-stat__label">Pending Applications</div>
+      </div>
+      <div class="agent-stat agent-stat--green">
+        <div class="agent-stat__val">4</div>
+        <div class="agent-stat__label">Active Licenses</div>
+      </div>
+      <div class="agent-stat agent-stat--red">
+        <div class="agent-stat__val">1</div>
+        <div class="agent-stat__label">Renewals Due</div>
+      </div>
+    </div>
+
+    <!-- Client list -->
+    <div class="agent-section-head">
+      <span class="agent-section-title">My Clients</span>
+    </div>
+
+    <div class="agent-clients" id="agentClientList"></div>
+
+    <a href="/agent/add-client" class="agent-add-btn">+ Add New Client</a>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/agent_dashboard.js') }}"></script>
+{% endblock %}

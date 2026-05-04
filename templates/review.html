@@ -1,0 +1,148 @@
+{% extends "_base.html" %}
+
+{% block title %}Review Your Application — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="reg-page">
+
+  <!-- ── Progress stepper ── -->
+  <div class="reg-stepper">
+    <div class="reg-stepper__inner">
+      <div class="reg-stepper__step">Profile</div>
+      <div class="reg-stepper__step">Details</div>
+      <div class="reg-stepper__step">Documents</div>
+      <div class="reg-stepper__step active">Review</div>
+    </div>
+  </div>
+
+  <!-- ── Top nav ── -->
+  <div class="reg-topnav">
+    <a href="/documents" class="reg-back-btn">← Back</a>
+    <a href="/" class="reg-home-btn">🏠 Home</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="reg-content reg-fade-in">
+    <h1 class="reg-title">Review your application 🔍</h1>
+    <p class="reg-sub">Check everything below before you pay. You can edit any section.</p>
+
+    <!-- Business Type -->
+    <div class="reg-review-section">
+      <div class="reg-review-section__header">
+        <span class="reg-review-section__title">Business Type</span>
+        <a href="/about-business?from=review" class="reg-review-edit-link">Edit</a>
+      </div>
+      <div class="reg-review-card reg-review-card--single">
+        <div class="reg-review-field__value" id="rv-businessTypes">—</div>
+      </div>
+    </div>
+
+    <!-- Food Type -->
+    <div class="reg-review-section">
+      <div class="reg-review-section__header">
+        <span class="reg-review-section__title">Food Categories</span>
+        <a href="/food-type?from=review" class="reg-review-edit-link">Edit</a>
+      </div>
+      <div class="reg-review-card reg-review-card--single">
+        <div class="reg-review-field__value" id="rv-foodTypes">—</div>
+      </div>
+    </div>
+
+    <!-- Scale -->
+    <div class="reg-review-section">
+      <div class="reg-review-section__header">
+        <span class="reg-review-section__title">Business Scale</span>
+        <a href="/scale?from=review" class="reg-review-edit-link">Edit</a>
+      </div>
+      <div class="reg-review-card">
+        <div>
+          <div class="reg-review-field__label">Annual Turnover</div>
+          <div class="reg-review-field__value" id="rv-turnover">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">License Type</div>
+          <div class="reg-review-field__value" id="rv-tier">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">Pan-India</div>
+          <div class="reg-review-field__value" id="rv-panIndia">No</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Details -->
+    <div class="reg-review-section">
+      <div class="reg-review-section__header">
+        <span class="reg-review-section__title">Business Details</span>
+        <a href="/business-details?from=review" class="reg-review-edit-link">Edit</a>
+      </div>
+      <div class="reg-review-card">
+        <div>
+          <div class="reg-review-field__label">Business Name</div>
+          <div class="reg-review-field__value" id="rv-bizName">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">Owner Name</div>
+          <div class="reg-review-field__value" id="rv-ownerName">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">Contact</div>
+          <div class="reg-review-field__value" id="rv-bizPhone">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">Address</div>
+          <div class="reg-review-field__value" id="rv-address">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">District / State</div>
+          <div class="reg-review-field__value" id="rv-location">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">Pincode</div>
+          <div class="reg-review-field__value" id="rv-pincode">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Documents -->
+    <div class="reg-review-section">
+      <div class="reg-review-section__header">
+        <span class="reg-review-section__title">Documents</span>
+        <a href="/documents?from=review" class="reg-review-edit-link">Edit</a>
+      </div>
+      <div class="reg-review-card reg-review-card--single">
+        <div class="reg-review-field__value" id="rv-documents">—</div>
+      </div>
+    </div>
+
+    <!-- License Duration (read-only — set on Business Details page) -->
+    <div class="reg-review-section">
+      <div class="reg-review-section__header">
+        <span class="reg-review-section__title">License Duration</span>
+        <a href="/business-details?from=review" class="reg-review-edit-link">Edit</a>
+      </div>
+      <div class="reg-review-card">
+        <div>
+          <div class="reg-review-field__label">Duration</div>
+          <div class="reg-review-field__value" id="rv-duration">—</div>
+        </div>
+        <div>
+          <div class="reg-review-field__label">Total Fee</div>
+          <div class="reg-review-field__value" id="rv-totalFee">—</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="reg-error" id="reviewError"></p>
+    <button class="reg-btn-cta" id="reviewPayBtn" style="margin-top:8px;">Proceed to Payment →</button>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/review.js') }}"></script>
+{% endblock %}

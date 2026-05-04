@@ -1,0 +1,44 @@
+{% extends "_base.html" %}
+{% block title %}Agent OTP — FoSCoS{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent_portal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <div class="agent-container--narrow">
+
+    <div style="margin-bottom:24px;">
+      <a href="/agent" class="agent-back">← Back</a>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-auth-icon">🔐</div>
+      <h1 class="agent-auth-title">Enter OTP</h1>
+      <p class="agent-auth-sub">OTP sent to +91 <span id="agentOtpPhone">—</span></p>
+
+      <div class="agent-otp-row">
+        <input class="agent-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+        <input class="agent-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+        <input class="agent-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+        <input class="agent-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+        <input class="agent-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+        <input class="agent-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+      </div>
+
+      <p class="agent-error" id="agentOtpError"></p>
+      <button class="agent-btn-primary" id="agentVerifyBtn">Verify &amp; Enter Portal →</button>
+
+      <div class="agent-resend-row" style="margin-top:14px;">
+        <button class="agent-resend-btn" id="agentResendBtn" style="display:none;">Resend OTP</button>
+        <span id="agentResendTimer"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/agent_verify.js') }}"></script>
+{% endblock %}

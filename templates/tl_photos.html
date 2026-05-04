@@ -1,0 +1,85 @@
+{% extends "_base.html" %}
+{% block title %}Photos — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab done">LOCATION</span>
+    <span class="tl-rail__tab done">DOCS</span>
+    <span class="tl-rail__tab active">FOOD</span>
+    <span class="tl-rail__tab">RULES</span>
+    <span class="tl-rail__tab">LICENSE</span>
+    <span class="tl-rail__tab">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/temp-license/details" class="tl-back">← Back</a>
+      <span class="tl-step-badge tl-step-badge--amber">📍 Step 4 of 8 — Photos</span>
+    </div>
+
+    <h1 class="tl-title">Photos of your setup 📸</h1>
+    <p class="tl-subtitle">Upload photos of your setup and equipment. GPS coordinates are automatically read from the photo.</p>
+
+    <div class="tl-tip tl-tip--sage">
+      <span>📍</span>
+      <div><span class="tl-tip__title">GPS location auto-extracted from photo metadata</span><br>Ensure location was enabled when the photo was taken. Coordinates are read from EXIF data and stored with your application.</div>
+    </div>
+
+    <div class="tl-card">
+      <!-- Photo 1 -->
+      <div class="tl-upload-row" id="photoRow1">
+        <div class="tl-upload-row__left">
+          <div class="tl-upload-row__num" id="photoNum1">1</div>
+          <div>
+            <div class="tl-upload-row__title">📦 Setup / Stall Photo</div>
+            <div class="tl-upload-row__sub">Geotagged photo of your stall or kitchen entrance</div>
+          </div>
+        </div>
+        <button class="tl-upload-btn" id="photoBtn1">Upload</button>
+        <input type="file" id="photoInput1" accept="image/*" capture="environment" style="display:none;">
+      </div>
+
+      <!-- Photo 2 -->
+      <div class="tl-upload-row" id="photoRow2">
+        <div class="tl-upload-row__left">
+          <div class="tl-upload-row__num" id="photoNum2">2</div>
+          <div>
+            <div class="tl-upload-row__title">🔧 Equipment / Cooking Area Photo</div>
+            <div class="tl-upload-row__sub">Geotagged photo of your stove, utensils, and prep area</div>
+          </div>
+        </div>
+        <button class="tl-upload-btn" id="photoBtn2">Upload</button>
+        <input type="file" id="photoInput2" accept="image/*" capture="environment" style="display:none;">
+      </div>
+
+      <div class="tl-progress-wrap">
+        <div class="tl-progress-label">
+          <span>Upload Progress</span>
+          <span id="photoCount">0 / 2</span>
+        </div>
+        <div class="tl-progress-bar">
+          <div class="tl-progress-bar__fill" id="photoProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="tl-btn-primary tl-btn-full" id="photosContinue" disabled>Continue →</button>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_photos.js') }}"></script>
+{% endblock %}

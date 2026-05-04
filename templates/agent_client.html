@@ -1,0 +1,98 @@
+{% extends "_base.html" %}
+{% block title %}Client View — Agent Portal{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent_portal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <div class="agent-container">
+
+    <!-- Agent banner -->
+    <div class="agent-banner">
+      <span class="agent-banner__label">🤝 Agent View — Acting on behalf of <span id="clientBannerName">—</span></span>
+      <a href="/agent/dashboard" class="agent-banner__back">← Back to Dashboard</a>
+    </div>
+
+    <div class="agent-two-col">
+
+      <!-- Main column -->
+      <div>
+        <!-- License card -->
+        <div class="agent-license-card">
+          <div class="agent-license-card__type">FSSAI License</div>
+          <div class="agent-license-card__biz" id="clientLicBiz">—</div>
+          <div class="agent-license-card__sub">Acting as Agent · <span id="clientLicType">—</span></div>
+          <div class="agent-license-card__footer">
+            <div>
+              <div class="agent-license-card__meta-label">Status</div>
+              <div class="agent-license-card__meta-val"><span class="agent-status-dot"></span><span id="clientStatus">—</span></div>
+            </div>
+            <div>
+              <div class="agent-license-card__meta-label">Days Left</div>
+              <div class="agent-license-card__meta-val" id="clientDaysLeft">—</div>
+            </div>
+            <div>
+              <div class="agent-license-card__meta-label">Category</div>
+              <div class="agent-license-card__meta-val" id="clientCategory">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action grid -->
+        <div class="agent-action-grid">
+          <button class="agent-action-btn" onclick="window.location.href='/track-application'">
+            <span class="agent-action-btn__icon">📊</span>
+            <span class="agent-action-btn__label">Track Application</span>
+          </button>
+          <button class="agent-action-btn" id="renewBtn">
+            <span class="agent-action-btn__icon">🔄</span>
+            <span class="agent-action-btn__label">Renew License</span>
+          </button>
+          <button class="agent-action-btn" id="annualBtn">
+            <span class="agent-action-btn__icon">📄</span>
+            <span class="agent-action-btn__label">File Annual Return</span>
+          </button>
+          <button class="agent-action-btn" onclick="window.location.href='/about-business'">
+            <span class="agent-action-btn__icon">📋</span>
+            <span class="agent-action-btn__label">New Application</span>
+          </button>
+          <button class="agent-action-btn" id="modifyBtn">
+            <span class="agent-action-btn__icon">✏️</span>
+            <span class="agent-action-btn__label">Modify License</span>
+          </button>
+          <button class="agent-action-btn" onclick="window.location.href='/one-stop-shop'">
+            <span class="agent-action-btn__icon">🛒</span>
+            <span class="agent-action-btn__label">One Stop Shop</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="agent-sidebar-card">
+          <div class="agent-sidebar-title">Application History</div>
+          <div class="agent-history-row">
+            <span class="agent-history-badge">APPROVED</span>
+            <span style="font-size:12px;color:var(--text-muted);">State License · Jan 2025</span>
+          </div>
+          <div class="agent-history-row">
+            <span class="agent-history-badge">APPROVED</span>
+            <span style="font-size:12px;color:var(--text-muted);">Basic Reg. · Jan 2023</span>
+          </div>
+        </div>
+
+        <div class="agent-note" id="clientNote"></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="agent-toast" id="agentToast"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/agent_client.js') }}"></script>
+{% endblock %}

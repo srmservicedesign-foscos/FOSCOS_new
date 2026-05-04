@@ -1,0 +1,187 @@
+{% extends "_base.html" %}
+
+{% block title %}FOSCOS — Food Safety Made Easy{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+{% endblock %}
+
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero__content">
+
+    <div class="hero__badge">
+      <span class="dot"></span>
+      <span>Government of India</span>
+    </div>
+
+    <h1>
+      Food Safety
+      <span class="highlight">Made Easy.</span>
+    </h1>
+
+    <p class="hero__sub">
+      Get your FSSAI license in minutes — not months.
+      A guided, conversational application built for every food business in India.
+    </p>
+
+    <button class="btn-hero" id="btnOpenHelp">
+      Hello — How can we help? 🙏
+    </button>
+
+  </div>
+
+  <!-- Right: stats -->
+  <div class="hero__visual">
+    <div class="hero-stat-card">
+      <div class="hero-stat-card__value">94 Lakh+</div>
+      <div class="hero-stat-card__label">Active licenses issued across India</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-card__value">15 Min</div>
+      <div class="hero-stat-card__label">Average time to complete application</div>
+    </div>
+    <div class="hero-stat-card">
+      <div class="hero-stat-card__value">₹100</div>
+      <div class="hero-stat-card__label">Starting cost for basic registration</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SERVICES
+     ════════════════════════════════════════════════════════════ -->
+<section class="services">
+  <span class="section-tag">What can we help with</span>
+  <h2 class="section-heading">Everything a food business needs</h2>
+  <p class="section-sub">From registration to renewal — all in one place</p>
+
+  <div class="cards-grid">
+
+    <!-- 1 · Apply for Permanent License -->
+    <a href="/about-business" class="card" data-requires-auth>
+      <div class="card__icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <rect x="3" y="1" width="13" height="17" rx="2" stroke="#64748b" stroke-width="1.5"/>
+          <path d="M6 7h7M6 10h7M6 13h4" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M13 1v4h3" stroke="#64748b" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Apply for Permanent License</h3>
+      <p>New businesses — guided 8-step process with AI assistance.</p>
+      <span class="card__cta">Get Started →</span>
+    </a>
+
+    <!-- 2 · Instant License (highlighted) -->
+    <a href="/temp-license" class="card card--highlight" id="cardInstantLicense">
+      <div class="card__icon card__icon--amber">
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="none">
+          <path d="M11 1L2 13h8l-1 8 9-12h-8l1-8z" fill="white" stroke="white" stroke-width="0.5" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Instant License (Temporary)</h3>
+      <p>Street vendors, home kitchens &amp; event stalls — instant 30-day or 60-day license.</p>
+      <span class="card__cta">Get Instant License →</span>
+    </a>
+
+    <!-- 3 · Renew License -->
+    <a href="/renew-license" class="card" data-requires-auth>
+      <div class="card__icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M4 11a7 7 0 1 0 1.5-4.33" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M4 4v3.5H7.5" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Renew License</h3>
+      <p>Existing licensees — pre-filled renewal with countdown alerts.</p>
+      <span class="card__cta">Renew Now →</span>
+    </a>
+
+    <!-- 4 · Track Application -->
+    <a href="#" class="card" id="cardTrackStatus">
+      <div class="card__icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <circle cx="10" cy="10" r="6" stroke="#64748b" stroke-width="1.5"/>
+          <path d="M15 15l4 4" stroke="#64748b" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Check License Status</h3>
+      <p>Track your application or verify any FSSAI license number.</p>
+      <span class="card__cta">Check →</span>
+    </a>
+
+    <!-- 5 · One Stop Shop -->
+    <a href="/one-stop-shop" class="card" data-requires-auth>
+      <div class="card__icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M1 1h3l2 10h11l2-7H6" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="9" cy="18" r="1.5" fill="#64748b"/>
+          <circle cx="16" cy="18" r="1.5" fill="#64748b"/>
+        </svg>
+      </div>
+      <h3>One Stop Shop</h3>
+      <p>Book water tests, medical certs, fire safety, safety kits &amp; hygiene checks.</p>
+      <span class="card__cta">Shop Now →</span>
+    </a>
+
+    <!-- 6 · Consumer Corner -->
+    <a href="/consumer-corner" class="card" data-requires-auth>
+      <div class="card__icon">
+        <svg width="20" height="22" viewBox="0 0 20 22" fill="none">
+          <path d="M10 1L2 4.5V10c0 5 3.5 8.5 8 10.5 4.5-2 8-5.5 8-10.5V4.5L10 1z"
+                stroke="#64748b" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M6.5 11l2.5 2.5 4-5" stroke="#64748b" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Consumer Corner</h3>
+      <p>File complaints, report unlicensed businesses, check hygiene ratings.</p>
+      <span class="card__cta">Report Issue →</span>
+    </a>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     LATEST UPDATES
+     ════════════════════════════════════════════════════════════ -->
+<section class="updates">
+  <div class="updates__head">
+    <div class="updates__head-left">
+      <span class="section-tag">Stay Informed</span>
+      <h2 class="section-heading">Latest Updates &amp; Regulations</h2>
+    </div>
+    <a href="/updates" class="btn-view-all" data-requires-auth>View All →</a>
+  </div>
+
+  <div class="updates-grid">
+
+    <a href="/updates" class="update-card" data-requires-auth>
+      <div class="update-card__type">Regulation</div>
+      <h4>FSSAI updates labelling norms for packaged food products — effective April 2026</h4>
+      <span class="update-card__date">15 Feb 2026</span>
+    </a>
+
+    <a href="/updates" class="update-card" data-requires-auth>
+      <div class="update-card__type">Notice</div>
+      <h4>New simplified registration process for street vendors and home-based FBOs</h4>
+      <span class="update-card__date">28 Jan 2026</span>
+    </a>
+
+    <a href="/updates" class="update-card" data-requires-auth>
+      <div class="update-card__type">Circular</div>
+      <h4>FoSTaC food safety training now mandatory for all licensed food establishments</h4>
+      <span class="update-card__date">10 Jan 2026</span>
+    </a>
+
+  </div>
+</section>
+
+{% endblock %}

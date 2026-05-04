@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+{% block title %}KYC Documents — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab done">LOCATION</span>
+    <span class="tl-rail__tab done">DOCS</span>
+    <span class="tl-rail__tab done">FOOD</span>
+    <span class="tl-rail__tab active">RULES</span>
+    <span class="tl-rail__tab">LICENSE</span>
+    <span class="tl-rail__tab">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/temp-license/details" class="tl-back">← Back</a>
+      <span class="tl-step-badge tl-step-badge--amber">📋 Step 5 of 8 — KYC</span>
+    </div>
+
+    <h1 class="tl-title">Basic KYC documents 📄</h1>
+    <p class="tl-subtitle">Just 2 documents needed. Phone photos are fine — no scanning required.</p>
+
+    <div class="tl-tip tl-tip--sage">
+      <span>🥔</span>
+      <div><span class="tl-tip__title">Potato Tip</span><br>Aadhaar + cart purchase bill (or rent agreement) is all you need. No notarization, no office visits.</div>
+    </div>
+
+    <div class="tl-card">
+      <!-- Doc 1: ID Proof -->
+      <div class="tl-upload-row" id="docRow1">
+        <div class="tl-upload-row__left">
+          <div class="tl-upload-row__num" id="docNum1">1</div>
+          <div>
+            <div class="tl-upload-row__title">🪪 Photo Identity Proof</div>
+            <div class="tl-upload-row__sub">Aadhaar · PAN · Voter ID · Driving Licence · Passport</div>
+          </div>
+        </div>
+        <button class="tl-upload-btn" id="docBtn1">Upload</button>
+        <input type="file" id="docInput1" accept="image/*,application/pdf" style="display:none;">
+      </div>
+      <div class="tl-ai-scan" id="docAiScan1" style="display:none;padding:8px 16px 4px;font-size:12px;color:var(--tl-sageDk);"></div>
+
+      <!-- Doc 2: Proof of Establishment -->
+      <div class="tl-upload-row" id="docRow2" style="margin-top:10px;">
+        <div class="tl-upload-row__left">
+          <div class="tl-upload-row__num" id="docNum2">2</div>
+          <div>
+            <div class="tl-upload-row__title">🏠 Proof of Establishment</div>
+            <div class="tl-upload-row__sub">Cart / stall purchase bill OR rent agreement</div>
+          </div>
+        </div>
+        <button class="tl-upload-btn" id="docBtn2">Upload</button>
+        <input type="file" id="docInput2" accept="image/*,application/pdf" style="display:none;">
+      </div>
+
+      <div class="tl-progress-wrap">
+        <div class="tl-progress-label">
+          <span>Upload Progress</span>
+          <span id="docCount">0 / 2</span>
+        </div>
+        <div class="tl-progress-bar">
+          <div class="tl-progress-bar__fill" id="docProgressFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="tl-btn-primary tl-btn-full" id="docsContinue" disabled>Continue →</button>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_docs.js') }}"></script>
+{% endblock %}

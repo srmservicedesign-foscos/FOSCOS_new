@@ -1,0 +1,88 @@
+{% extends "_base.html" %}
+{% block title %}Add Client — Agent Portal{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent_portal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <div class="agent-container--narrow">
+
+    <div style="margin-bottom:20px;">
+      <a href="/agent/dashboard" class="agent-back">← Back to Dashboard</a>
+    </div>
+
+    <div class="agent-card">
+      <h1 class="agent-auth-title" style="text-align:left;margin-bottom:4px;">Add New Client</h1>
+      <p class="agent-auth-sub" style="text-align:left;margin-bottom:20px;">Add a client to your portfolio. If they already have an FSSAI account, link it via OTP.</p>
+
+      <!-- Path selection -->
+      <div class="agent-path-grid">
+        <div class="agent-path-card" id="pathExisting" onclick="selectPath('existing')">
+          <div class="agent-path-card__icon">🔗</div>
+          <div class="agent-path-card__title">Existing Account</div>
+          <div class="agent-path-card__sub">Client has FSSAI login — link via OTP</div>
+        </div>
+        <div class="agent-path-card" id="pathNew" onclick="selectPath('new')">
+          <div class="agent-path-card__icon">✨</div>
+          <div class="agent-path-card__title">New Client</div>
+          <div class="agent-path-card__sub">No account yet — fill in details</div>
+        </div>
+      </div>
+
+      <!-- Branch A: Existing account -->
+      <div class="agent-form-section" id="formExisting">
+        <div class="agent-field">
+          <label class="agent-field__label" for="existingPhone">Client Mobile Number</label>
+          <div class="agent-field__input-wrap">
+            <span class="agent-field__prefix">+91</span>
+            <input type="tel" id="existingPhone" placeholder="10-digit number" maxlength="10" inputmode="numeric">
+          </div>
+        </div>
+        <p class="agent-helper-text" style="margin-bottom:14px;">An OTP will be sent to the client's number. They confirm to grant you access.</p>
+        <p class="agent-error" id="existingError"></p>
+        <button class="agent-btn-primary" id="sendClientOtpBtn">Send OTP to Client →</button>
+      </div>
+
+      <!-- Branch B: New client -->
+      <div class="agent-form-section" id="formNew">
+        <div class="agent-field">
+          <label class="agent-field__label" for="newClientName">Client Name</label>
+          <input type="text" class="agent-field__input" id="newClientName" placeholder="e.g. Ravi Kumar">
+        </div>
+        <div class="agent-field">
+          <label class="agent-field__label" for="newBizName">Business Name</label>
+          <input type="text" class="agent-field__input" id="newBizName" placeholder="e.g. Ravi Snacks Corner">
+        </div>
+        <div class="agent-field">
+          <label class="agent-field__label" for="newMobile">Mobile Number</label>
+          <div class="agent-field__input-wrap">
+            <span class="agent-field__prefix">+91</span>
+            <input type="tel" id="newMobile" placeholder="10-digit number" maxlength="10" inputmode="numeric">
+          </div>
+        </div>
+        <div class="agent-field">
+          <label class="agent-field__label" for="newBizType">Business Type</label>
+          <select class="agent-field__input" id="newBizType">
+            <option value="">— Select —</option>
+            <option>Street Vendor / Home Kitchen</option>
+            <option>Restaurant / Café</option>
+            <option>Catering / Cloud Kitchen</option>
+            <option>Retail Food Shop</option>
+            <option>Food Manufacturer</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <p class="agent-error" id="newClientError"></p>
+        <button class="agent-btn-primary" id="createClientBtn">Add Client &amp; Start Application →</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/agent_add_client.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,186 @@
+{% extends "_base.html" %}
+
+{% block title %}Business Details — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="reg-page">
+
+  <!-- ── Progress stepper ── -->
+  <div class="reg-stepper">
+    <div class="reg-stepper__inner">
+      <div class="reg-stepper__step">Profile</div>
+      <div class="reg-stepper__step active">Details</div>
+      <div class="reg-stepper__step">Documents</div>
+      <div class="reg-stepper__step">Review</div>
+    </div>
+  </div>
+
+  <!-- ── Top nav ── -->
+  <div class="reg-topnav">
+    <a href="/scale" class="reg-back-btn">← Back</a>
+    <a href="/" class="reg-home-btn">🏠 Home</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="reg-content reg-fade-in">
+    <h1 class="reg-title">Tell us about your premises 🏪</h1>
+    <p class="reg-sub">A few details about where you operate from. All fields can be edited manually.</p>
+
+    <div class="reg-two-col" style="align-items:start;">
+
+      <!-- LEFT COLUMN -->
+      <div>
+
+        <!-- BUSINESS INFO -->
+        <div class="reg-form-card" style="margin-bottom:20px;">
+          <p class="reg-section-label">Business Information</p>
+
+          <label class="reg-field-label" for="bizName">Business / Trade Name</label>
+          <input class="reg-input" type="text" id="bizName" placeholder="e.g. Sharma's Dhaba" autocomplete="organization" />
+
+          <label class="reg-field-label" for="ownerName">Owner / Proprietor Name</label>
+          <input class="reg-input" type="text" id="ownerName" placeholder="Full legal name" autocomplete="name" />
+
+          <label class="reg-field-label" for="bizPhone">Business Contact Number</label>
+          <div class="reg-number-wrap">
+            <div class="reg-number-wrap__prefix">+91</div>
+            <input type="tel" id="bizPhone" placeholder="10-digit number" maxlength="10" inputmode="numeric" />
+          </div>
+
+          <label class="reg-field-label" for="licenseDuration" style="margin-top:16px;">License Duration</label>
+          <select class="reg-input" id="licenseDuration">
+            <option value="1">1 Year</option>
+            <option value="2">2 Years</option>
+            <option value="3">3 Years</option>
+            <option value="4">4 Years</option>
+            <option value="5">5 Years</option>
+            <option value="6">6 Years</option>
+            <option value="7">7 Years</option>
+            <option value="8">8 Years</option>
+            <option value="9">9 Years</option>
+            <option value="10">10 Years</option>
+          </select>
+          <p id="durationFeeNote" style="font-size:12px;color:var(--text-muted);margin-top:4px;"></p>
+        </div>
+
+        <!-- PREMISES PHOTOS -->
+        <div class="reg-form-card" style="margin-bottom:20px;">
+          <p class="reg-section-label">Premises Photos</p>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Upload photos of your premises. GPS data from photo 1 will auto-detect your location.</p>
+          <div class="reg-photo-row">
+            <label class="reg-photo-check" id="photo1Area">
+              <div class="photo-icon">📷</div>
+              <div>Front view</div>
+              <input type="file" id="premisesPhoto1" accept="image/*" capture="environment" />
+              <img class="thumb" id="photo1Thumb" src="" alt="" style="display:none;" />
+            </label>
+            <label class="reg-photo-check" id="photo2Area">
+              <div class="photo-icon">📷</div>
+              <div>Interior / kitchen</div>
+              <input type="file" id="premisesPhoto2" accept="image/*" />
+              <img class="thumb" id="photo2Thumb" src="" alt="" style="display:none;" />
+            </label>
+          </div>
+          <div id="gpsTag" class="reg-gps-tag" style="display:none;">
+            <span>📍</span>
+            <span id="gpsText">Location detected</span>
+          </div>
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="reg-form-card" style="margin-bottom:20px;">
+          <p class="reg-section-label">Premises Address</p>
+
+          <label class="reg-field-label" for="addrLine1">Street Address / Plot No.</label>
+          <input class="reg-input" type="text" id="addrLine1" placeholder="Shop no., building, street" autocomplete="address-line1" />
+
+          <div class="reg-addr-row" style="margin-top:0;">
+            <div>
+              <label class="reg-field-label" for="addrPincode">Pincode</label>
+              <input class="reg-input" type="text" id="addrPincode" placeholder="6-digit pincode" maxlength="6" inputmode="numeric" />
+            </div>
+            <div>
+              <label class="reg-field-label" for="addrDistrict">District</label>
+              <input class="reg-input" type="text" id="addrDistrict" placeholder="e.g. South Delhi" />
+            </div>
+          </div>
+
+          <label class="reg-field-label" for="addrState">State / UT</label>
+          <input class="reg-input" type="text" id="addrState" placeholder="e.g. Delhi" />
+        </div>
+
+        <!-- TAX INFORMATION (shown for state/central license) -->
+        <div class="reg-form-card" id="taxSection" style="display:none;margin-bottom:20px;">
+          <p class="reg-section-label">Tax Information</p>
+
+          <label class="reg-field-label" for="panNumber">PAN Card Number</label>
+          <input class="reg-input" type="text" id="panNumber" placeholder="ABCDE1234F" maxlength="10"
+                 style="text-transform:uppercase;" autocomplete="off" />
+          <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">Required for State / Central license applicants</p>
+
+          <label class="reg-field-label" for="gstNumber">GSTIN (optional)</label>
+          <input class="reg-input" type="text" id="gstNumber" placeholder="22ABCDE1234F1Z5" maxlength="15"
+                 style="text-transform:uppercase;" autocomplete="off" />
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+
+        <!-- PERSON IN CHARGE -->
+        <div class="reg-form-card" style="margin-bottom:20px;">
+          <p class="reg-section-label">Person in Charge</p>
+
+          <label class="reg-field-label" for="personInCharge">Name of Person in Charge</label>
+          <input class="reg-input" type="text" id="personInCharge" placeholder="Person managing day-to-day ops" />
+
+          <label class="reg-field-label" for="personPhone" style="margin-top:12px;">Contact Number</label>
+          <div class="reg-number-wrap">
+            <div class="reg-number-wrap__prefix">+91</div>
+            <input type="tel" id="personPhone" placeholder="10-digit number" maxlength="10" inputmode="numeric" />
+          </div>
+
+          <label class="reg-field-label" for="idProofType" style="margin-top:12px;">Photo ID Type</label>
+          <select class="reg-input" id="idProofType">
+            <option value="">— Select ID type —</option>
+            <option value="aadhaar">Aadhaar Card</option>
+            <option value="pan">PAN Card</option>
+            <option value="passport">Passport</option>
+            <option value="voter">Voter ID</option>
+            <option value="dl">Driving Licence</option>
+            <option value="govtid">Government Employee ID</option>
+          </select>
+
+          <label class="reg-field-label" for="idProofNumber" id="idProofNumberLabel" style="margin-top:12px;">ID Number</label>
+          <input class="reg-input" type="text" id="idProofNumber" placeholder="Select an ID type above" autocomplete="off" />
+          <p style="font-size:12px;color:var(--text-muted);margin-top:4px;" id="idProofHint">Stored securely and used for identity verification only.</p>
+        </div>
+
+        <!-- Potato tip -->
+        <div class="reg-info-tip">
+          <div class="reg-info-tip__icon">🥔</div>
+          <div>
+            <strong>Potato's tip:</strong> Use the same address as your shop/kitchen lease agreement. Officers may visit for inspection — the address must match physical premises.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <p class="reg-error" id="detailsError"></p>
+    <button class="reg-btn-cta" id="detailsContinueBtn" style="margin-top:24px;">Looks good, continue →</button>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/exifr/dist/lite.umd.js"></script>
+<script src="{{ url_for('static', filename='js/business_details.js') }}"></script>
+{% endblock %}

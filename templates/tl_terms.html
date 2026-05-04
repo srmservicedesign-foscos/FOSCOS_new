@@ -1,0 +1,104 @@
+{% extends "_base.html" %}
+{% block title %}Operating Rules — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab done">LOCATION</span>
+    <span class="tl-rail__tab done">DOCS</span>
+    <span class="tl-rail__tab done">FOOD</span>
+    <span class="tl-rail__tab done">RULES</span>
+    <span class="tl-rail__tab active">LICENSE</span>
+    <span class="tl-rail__tab">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/temp-license/docs" class="tl-back">← Back</a>
+      <span class="tl-step-badge tl-step-badge--amber">📋 Step 6 of 8 — T&amp;C</span>
+    </div>
+
+    <h1 class="tl-title">Operating Rules &amp; Terms 📋</h1>
+    <p class="tl-subtitle">Please read and accept the conditions of your Temporary License before it is issued.</p>
+
+    <!-- Restricted rules -->
+    <div class="tl-card">
+      <div class="tl-question" style="margin-bottom:14px;">⚠️ Restricted Operating Rules</div>
+
+      <div class="tl-rule-card">
+        <div class="tl-rule-card__icon">📐</div>
+        <div>
+          <div class="tl-rule-card__title">Maximum Area: 500 sq. ft.</div>
+          <div class="tl-rule-card__desc">Your kitchen or stall must not exceed 500 sq. ft. of food preparation area.</div>
+        </div>
+      </div>
+
+      <div class="tl-rule-card">
+        <div class="tl-rule-card__icon">🔥</div>
+        <div>
+          <div class="tl-rule-card__title">Gas Stove Only — No Industrial Equipment</div>
+          <div class="tl-rule-card__desc">Commercial deep fryers, blast chillers, or industrial cooking units are not permitted.</div>
+        </div>
+      </div>
+
+      <div class="tl-rule-card">
+        <div class="tl-rule-card__icon">🥗</div>
+        <div>
+          <div class="tl-rule-card__title">Low-Risk Foods Only</div>
+          <div class="tl-rule-card__desc">You may not sell raw meat, unpasteurised dairy, or products requiring cold chain certification.</div>
+        </div>
+      </div>
+
+      <div class="tl-rule-card" style="margin-bottom:0;">
+        <div class="tl-rule-card__icon">⏰</div>
+        <div>
+          <div class="tl-rule-card__title">Valid for 60 Days Only</div>
+          <div class="tl-rule-card__desc">You must complete compliance requirements and upgrade within 60 days or cease operations.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmations -->
+    <div class="tl-card">
+      <div class="tl-question" style="margin-bottom:14px;">I confirm that:</div>
+
+      <label class="tl-checkbox-card">
+        <input type="checkbox" class="tl-tc-check" id="tc1">
+        <span class="tl-checkbox-card__label">I have read and understood the <strong>restricted operating rules</strong> listed above.</span>
+      </label>
+
+      <label class="tl-checkbox-card">
+        <input type="checkbox" class="tl-tc-check" id="tc2">
+        <span class="tl-checkbox-card__label">I agree that FSSAI officers may conduct an <strong>unannounced inspection</strong> of my premises.</span>
+      </label>
+
+      <label class="tl-checkbox-card">
+        <input type="checkbox" class="tl-tc-check" id="tc3">
+        <span class="tl-checkbox-card__label">I will complete <strong>FoSTaC food safety training</strong> and apply for a permanent license within the validity period.</span>
+      </label>
+
+      <label class="tl-checkbox-card">
+        <input type="checkbox" class="tl-tc-check" id="tc4">
+        <span class="tl-checkbox-card__label">All information I have provided is <strong>true and accurate</strong> to the best of my knowledge.</span>
+      </label>
+    </div>
+
+    <button class="tl-btn-primary tl-btn-full" id="tcGetLicense" disabled>🏆 Get My Temporary License →</button>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_terms.js') }}"></script>
+{% endblock %}

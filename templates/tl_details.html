@@ -1,0 +1,186 @@
+{% extends "_base.html" %}
+{% block title %}Your Details — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab done">LOCATION</span>
+    <span class="tl-rail__tab active">DOCS</span>
+    <span class="tl-rail__tab">FOOD</span>
+    <span class="tl-rail__tab">RULES</span>
+    <span class="tl-rail__tab">LICENSE</span>
+    <span class="tl-rail__tab">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/temp-license/purpose" class="tl-back">← Back</a>
+      <span class="tl-step-badge tl-step-badge--amber">Step 3 of 8 — Your Details</span>
+    </div>
+
+    <h1 class="tl-title">Tell us about yourself 👨‍🍳</h1>
+    <p class="tl-subtitle">Basic details for your license. Takes 2 minutes.</p>
+
+    <div class="tl-card">
+
+      <!-- Full Name -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlName">Full Name</label>
+        <input type="text" id="tlName" class="tl-field__input" placeholder="e.g. Ramesh Kumar Sharma">
+      </div>
+
+      <!-- Business Name -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlBizName">Business / Stall Name</label>
+        <input type="text" id="tlBizName" class="tl-field__input" placeholder="e.g. Ramesh Chaat Corner">
+      </div>
+
+      <!-- Mobile -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlPhone">Mobile Number</label>
+        <div class="tl-field__input-wrap">
+          <span class="tl-field__prefix">+91</span>
+          <input type="tel" id="tlPhone" class="tl-field__input-inner" placeholder="10-digit number" maxlength="10">
+        </div>
+      </div>
+
+      <!-- Email (optional) -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlEmail">
+          Email Address
+          <span style="font-weight:400;color:var(--tl-gray);font-size:11px;margin-left:6px;">Optional</span>
+        </label>
+        <input type="email" id="tlEmail" class="tl-field__input" placeholder="you@example.com">
+      </div>
+
+      <!-- State -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlState">State / UT</label>
+        <select id="tlState" class="tl-field__input" style="cursor:pointer;">
+          <option value="">— Select State / UT —</option>
+          <option>Andaman and Nicobar Islands</option>
+          <option>Andhra Pradesh</option>
+          <option>Arunachal Pradesh</option>
+          <option>Assam</option>
+          <option>Bihar</option>
+          <option>Chandigarh</option>
+          <option>Chhattisgarh</option>
+          <option>Dadra and Nagar Haveli and Daman and Diu</option>
+          <option>Delhi</option>
+          <option>Goa</option>
+          <option>Gujarat</option>
+          <option>Haryana</option>
+          <option>Himachal Pradesh</option>
+          <option>Jammu and Kashmir</option>
+          <option>Jharkhand</option>
+          <option>Karnataka</option>
+          <option>Kerala</option>
+          <option>Ladakh</option>
+          <option>Lakshadweep</option>
+          <option>Madhya Pradesh</option>
+          <option>Maharashtra</option>
+          <option>Manipur</option>
+          <option>Meghalaya</option>
+          <option>Mizoram</option>
+          <option>Nagaland</option>
+          <option>Odisha</option>
+          <option>Puducherry</option>
+          <option>Punjab</option>
+          <option>Rajasthan</option>
+          <option>Sikkim</option>
+          <option>Tamil Nadu</option>
+          <option>Telangana</option>
+          <option>Tripura</option>
+          <option>Uttar Pradesh</option>
+          <option>Uttarakhand</option>
+          <option>West Bengal</option>
+        </select>
+      </div>
+
+      <!-- District -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlDistrict">District</label>
+        <input type="text" id="tlDistrict" class="tl-field__input" placeholder="e.g. Ahmedabad">
+      </div>
+
+      <!-- Pincode -->
+      <div class="tl-field">
+        <label class="tl-field__label" for="tlPincode">Pincode</label>
+        <input type="text" id="tlPincode" class="tl-field__input" placeholder="6-digit pincode" maxlength="6" inputmode="numeric">
+      </div>
+
+      <!-- Setup Photos -->
+      <div class="tl-field">
+        <label class="tl-field__label">Setup Photos
+          <span style="font-weight:400;color:var(--tl-gray);font-size:11px;margin-left:6px;">GPS location auto-extracted from photo metadata</span>
+        </label>
+        <div class="reg-photo-row" style="gap:10px;margin-top:6px;">
+          <label class="reg-photo-check" id="tlPhoto1Area" style="cursor:pointer;">
+            <div class="photo-icon">📷</div>
+            <div style="font-size:12px;color:var(--tl-gray);margin-top:4px;">Stall / Setup</div>
+            <input type="file" id="tlPremisesPhoto1" accept="image/*" capture="environment" style="display:none;">
+            <img class="thumb" id="tlPhoto1Thumb" src="" alt="" style="display:none;">
+          </label>
+          <label class="reg-photo-check" id="tlPhoto2Area" style="cursor:pointer;">
+            <div class="photo-icon">📷</div>
+            <div style="font-size:12px;color:var(--tl-gray);margin-top:4px;">Equipment / Kitchen</div>
+            <input type="file" id="tlPremisesPhoto2" accept="image/*" style="display:none;">
+            <img class="thumb" id="tlPhoto2Thumb" src="" alt="" style="display:none;">
+          </label>
+        </div>
+        <div id="tlGpsTag" style="display:none;margin-top:6px;font-size:12px;color:var(--tl-sageDk);">📍 GPS: <span id="tlGpsText"></span></div>
+        <div style="font-size:11px;color:var(--tl-gray);margin-top:4px;">Optional — helps verify your location</div>
+      </div>
+
+      <!-- Establishment type -->
+      <div class="tl-field" style="margin-bottom:0;">
+        <label class="tl-field__label">Kind of Establishment</label>
+        <div class="tl-setup-grid" id="tlEstabGrid">
+          <button class="tl-setup-card" data-estab="vendor">
+            <span class="tl-setup-card__icon">🧑‍🍳</span>
+            <span class="tl-setup-card__label">Street Vendor</span>
+          </button>
+          <button class="tl-setup-card" data-estab="cart">
+            <span class="tl-setup-card__icon">🛺</span>
+            <span class="tl-setup-card__label">Food Cart</span>
+          </button>
+          <button class="tl-setup-card" data-estab="stall">
+            <span class="tl-setup-card__icon">🏪</span>
+            <span class="tl-setup-card__label">Fixed Stall</span>
+          </button>
+          <button class="tl-setup-card" data-estab="home">
+            <span class="tl-setup-card__icon">🏠</span>
+            <span class="tl-setup-card__label">Home Kitchen</span>
+          </button>
+          <button class="tl-setup-card" data-estab="tiffin">
+            <span class="tl-setup-card__icon">🍱</span>
+            <span class="tl-setup-card__label">Tiffin Service</span>
+          </button>
+          <button class="tl-setup-card" data-estab="other">
+            <span class="tl-setup-card__icon">+</span>
+            <span class="tl-setup-card__label">Other</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p class="tl-error" id="tlDetailsError" style="color:#b91c1c;font-size:13px;margin-bottom:10px;"></p>
+    <button class="tl-btn-primary tl-btn-full" id="tlDetailsContinue">Continue →</button>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_details.js') }}"></script>
+{% endblock %}

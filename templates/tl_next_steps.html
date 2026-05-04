@@ -1,0 +1,173 @@
+{% extends "_base.html" %}
+{% block title %}Compliance Steps — Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab done">LOCATION</span>
+    <span class="tl-rail__tab done">DOCS</span>
+    <span class="tl-rail__tab done">FOOD</span>
+    <span class="tl-rail__tab done">RULES</span>
+    <span class="tl-rail__tab done">LICENSE</span>
+    <span class="tl-rail__tab done">FOSTAC</span>
+    <span class="tl-rail__tab active">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/temp-license/issued" class="tl-back">← Back</a>
+      <span class="tl-step-badge tl-step-badge--amber">📋 Step 8 of 8 — Compliance</span>
+    </div>
+
+    <h1 class="tl-title">Complete Your Compliance 📋</h1>
+    <p class="tl-subtitle">Finish these 3 steps before your license expires to qualify for a permanent license.</p>
+
+    <!-- Countdown banner -->
+    <div class="tl-countdown-banner">
+      <div class="tl-countdown-banner__icon">⏳</div>
+      <div>
+        <div class="tl-countdown-banner__title">License expires in <span id="nsCountdown">—</span> days</div>
+        <div class="tl-countdown-banner__sub">Expires on <span id="nsExpiry">—</span> · Complete all 3 steps to upgrade</div>
+      </div>
+    </div>
+
+    <!-- 3-tab compliance panel -->
+    <div class="tl-tabs" role="tablist">
+      <button class="tl-tab active" id="tabWater"      onclick="switchTab('water')">🧪 Water</button>
+      <button class="tl-tab"        id="tabFostac"     onclick="switchTab('fostac')">📚 FoSTaC</button>
+      <button class="tl-tab"        id="tabInspection" onclick="switchTab('inspection')">🔍 Inspection</button>
+    </div>
+
+    <!-- Water Report tab -->
+    <div class="tl-tab-panel active" id="panelWater">
+      <div class="tl-card">
+        <div class="tl-question" style="margin-bottom:6px;">Water Quality Test</div>
+        <p style="font-size:13px;color:var(--tl-gray);margin:0 0 14px;">Get your water source tested at an FSSAI-approved lab. Upload the certificate here.</p>
+
+        <div class="tl-lab-card">
+          <div>
+            <div class="tl-lab-card__name">National Test House — Ahmedabad</div>
+            <div class="tl-lab-card__meta">NABL Accredited · Results in 3–5 working days · ₹450</div>
+          </div>
+          <button class="tl-lab-btn" onclick="mockBook('water', 'National Test House', this)">Book</button>
+        </div>
+
+        <div class="tl-lab-card">
+          <div>
+            <div class="tl-lab-card__name">FDIL — Food &amp; Drug Testing Lab</div>
+            <div class="tl-lab-card__meta">NABL Accredited · Results in 2–3 working days · ₹380</div>
+          </div>
+          <button class="tl-lab-btn" onclick="mockBook('water', 'FDIL', this)">Book</button>
+        </div>
+
+        <div id="waterBookedMsg" style="display:none;" class="tl-tip tl-tip--sage">
+          <span>✅</span>
+          <div><span class="tl-tip__title">Booking Confirmed</span><br>You'll receive a confirmation SMS. Bring a 500ml water sample in a sealed container.</div>
+        </div>
+        <div id="waterPendingNote" style="display:none;font-size:12px;color:#2563eb;margin-top:6px;">⏳ Pending officer approval — we'll notify you once verified.</div>
+
+        <button class="tl-upload-secondary" id="waterUploadBtn">⬆ Upload Water Test Certificate</button>
+        <input type="file" id="waterInput" accept="image/*,application/pdf" style="display:none;">
+        <div id="waterDoneMsg" style="display:none;margin-top:10px;font-size:13px;color:var(--tl-sageDk);font-weight:600;">✅ Certificate uploaded</div>
+      </div>
+    </div>
+
+    <!-- FoSTaC tab -->
+    <div class="tl-tab-panel" id="panelFostac">
+      <div class="tl-card">
+        <div class="tl-question" style="margin-bottom:6px;">FoSTaC Food Safety Training</div>
+        <p style="font-size:13px;color:var(--tl-gray);margin:0 0 14px;">Complete a government-certified food safety training session. Online sessions are self-paced and free.</p>
+
+        <div class="tl-lab-card">
+          <div>
+            <div class="tl-lab-card__name">FoSTaC Online — Basic Food Safety</div>
+            <div class="tl-lab-card__meta">Free · Self-paced · ~3 hours · Certificate issued immediately</div>
+          </div>
+          <button class="tl-lab-btn" onclick="mockBook('fostac', 'Online Basic', this)">Enrol</button>
+        </div>
+
+        <div class="tl-lab-card">
+          <div>
+            <div class="tl-lab-card__name">FSSAI Training Centre — Gandhinagar</div>
+            <div class="tl-lab-card__meta">In-person · Next batch: 12 May 2026 · ₹200</div>
+          </div>
+          <button class="tl-lab-btn" onclick="mockBook('fostac', 'Gandhinagar Centre', this)">Book Seat</button>
+        </div>
+
+        <div id="fostacBookedMsg" style="display:none;" class="tl-tip tl-tip--sage">
+          <span>✅</span>
+          <div><span class="tl-tip__title">Enrolled Successfully</span><br>Check your registered phone number for login details. Complete the course and download your certificate.</div>
+        </div>
+        <div id="fostacPendingNote" style="display:none;font-size:12px;color:#2563eb;margin-top:6px;">⏳ Pending officer approval — we'll notify you once verified.</div>
+
+        <button class="tl-upload-secondary" id="fostacUploadBtn">⬆ Upload FoSTaC Certificate</button>
+        <input type="file" id="fostacInput" accept="image/*,application/pdf" style="display:none;">
+        <div id="fostacDoneMsg" style="display:none;margin-top:10px;font-size:13px;color:var(--tl-sageDk);font-weight:600;">✅ Certificate uploaded</div>
+      </div>
+    </div>
+
+    <!-- Inspection tab -->
+    <div class="tl-tab-panel" id="panelInspection">
+      <div class="tl-card">
+        <div class="tl-question" style="margin-bottom:6px;">Premise Inspection</div>
+        <p style="font-size:13px;color:var(--tl-gray);margin:0 0 14px;">An FSSAI officer will visit your premises. Select a preferred slot and ensure your setup is ready.</p>
+
+        <div class="tl-lab-card">
+          <div>
+            <div class="tl-lab-card__name">Morning Slot — 9:00 AM to 12:00 PM</div>
+            <div class="tl-lab-card__meta">Available: Mon, Wed, Fri · Earliest: 5 May 2026</div>
+          </div>
+          <button class="tl-lab-btn" onclick="mockBook('inspection', 'Morning Slot', this)">Request</button>
+        </div>
+
+        <div class="tl-lab-card">
+          <div>
+            <div class="tl-lab-card__name">Afternoon Slot — 2:00 PM to 5:00 PM</div>
+            <div class="tl-lab-card__meta">Available: Tue, Thu, Sat · Earliest: 6 May 2026</div>
+          </div>
+          <button class="tl-lab-btn" onclick="mockBook('inspection', 'Afternoon Slot', this)">Request</button>
+        </div>
+
+        <div id="inspectionBookedMsg" style="display:none;" class="tl-tip tl-tip--sage">
+          <span>✅</span>
+          <div><span class="tl-tip__title">Inspection Requested</span><br>You'll receive confirmation 48 hours before the visit. Ensure your premises is accessible and clean.</div>
+        </div>
+        <div id="inspectionPendingNote" style="display:none;font-size:12px;color:#2563eb;margin-top:6px;">⏳ Pending officer approval — we'll notify you once verified.</div>
+
+        <div class="tl-tip tl-tip--amber" style="margin-top:12px;">
+          <span>📋</span>
+          <div><span class="tl-tip__title">Checklist reminder</span><br>Clean surfaces, labelled containers, no expired stock, pest-free storage, valid water supply.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upgrade CTA -->
+    <div class="tl-card" style="text-align:center;padding:24px;" id="upgradeCta">
+      <div style="font-size:28px;margin-bottom:8px;">🏅</div>
+      <div style="font-size:16px;font-weight:700;color:var(--tl-navyDk);margin-bottom:6px;">Ready to go permanent?</div>
+      <div style="font-size:13px;color:var(--tl-gray);margin-bottom:12px;">Once all 3 compliance steps are complete, upgrade to a full FSSAI license — no re-inspection needed.</div>
+      <div id="upgradeBlockedMsg" style="display:none;font-size:13px;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:10px 14px;margin-bottom:12px;">
+        ⚠️ Complete all 3 compliance steps above before upgrading.
+      </div>
+      <div id="upgradePendingMsg" style="display:none;font-size:13px;color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 14px;margin-bottom:12px;">
+        ⏳ Your requests are under officer review. Upgrade will be available once all 3 steps are approved.
+      </div>
+      <button class="tl-btn-primary tl-btn-full" id="upgradeBtn" style="margin-top:4px;">Upgrade to Permanent License →</button>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_next_steps.js') }}"></script>
+{% endblock %}

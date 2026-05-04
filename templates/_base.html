@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}FOSCOS — Food Safety Made Easy{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}" />
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ── NAVBAR ──────────────────────────────────────────────── -->
+<nav class="navbar">
+  <a href="/" class="navbar__logo">
+    <img src="{{ url_for('static', filename='images/fssai_logo.png') }}" alt="FSSAI" class="navbar__logo-img" />
+  </a>
+
+  <div class="navbar__links">
+    <a href="/" class="{% block nav_home %}{% endblock %}">Home</a>
+    <a href="/regulations" class="{% block nav_reg %}{% endblock %}">Regulations</a>
+    <a href="/latest-updates" class="{% block nav_updates %}{% endblock %}">Latest Updates</a>
+    <a href="/about-fssai" class="{% block nav_about %}{% endblock %}">About FSSAI</a>
+  </div>
+
+  <div class="navbar__actions">
+    <button class="btn-lang">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M7 1 Q9.5 7 7 13 Q4.5 7 7 1Z" stroke="currentColor" stroke-width="1" fill="none"/>
+        <path d="M1 7 Q7 9.5 13 7 Q7 4.5 1 7Z" stroke="currentColor" stroke-width="1" fill="none"/>
+      </svg>
+      English
+    </button>
+    <button class="btn-login" id="btnLogin">Login</button>
+    <div id="navUserSection" style="display:none;align-items:center;"></div>
+  </div>
+</nav>
+
+<!-- ── PAGE CONTENT ────────────────────────────────────────── -->
+{% block content %}{% endblock %}
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer__brand">
+    <img src="{{ url_for('static', filename='images/fssai_logo.png') }}" alt="FSSAI" class="footer__logo-img" />
+  </div>
+  <nav class="footer__links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+    <a href="#">Accessibility</a>
+    <a href="#">RTI</a>
+    <a href="#">Sitemap</a>
+  </nav>
+  <span class="footer__copy">© 2026 FSSAI, Government of India</span>
+</footer>
+
+<!-- ══════════════════════════════════════════════════════════
+     LOGIN MODAL (existing users only)
+     ══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="loginModalOverlay">
+  <div class="login-modal">
+    <button class="login-modal__close" id="btnModalClose" aria-label="Close">&#x2715;</button>
+
+    <!-- Step 1: Phone -->
+    <div id="loginPhoneStep">
+      <div class="login-modal__icon">📱</div>
+      <h2 class="login-modal__title">Welcome back</h2>
+      <p class="login-modal__sub">Enter your registered mobile number to sign in</p>
+
+      <div class="login-form-card">
+        <label class="login-field-label" for="loginPhoneInput">Mobile Number</label>
+        <div class="login-phone-row">
+          <div class="login-phone-prefix">+91</div>
+          <input
+            type="tel"
+            id="loginPhoneInput"
+            class="login-phone-input"
+            placeholder="Enter 10-digit number"
+            maxlength="10"
+            inputmode="numeric"
+            pattern="[0-9]{10}"
+            autocomplete="tel-national"
+          />
+        </div>
+        <button class="login-btn-cta" id="loginSendOtpBtn">Send OTP →</button>
+        <p class="login-form-footer">New to FOSCOS? Use the <strong>Hello — How can we help?</strong> button on the home page.</p>
+      </div>
+    </div>
+
+    <!-- Step 2: OTP -->
+    <div id="loginOtpStep" style="display:none;">
+      <div class="login-modal__icon">🔐</div>
+      <h2 class="login-modal__title">Enter verification code</h2>
+      <p class="login-modal__sub">OTP sent to <strong id="loginOtpPhone"></strong></p>
+
+      <div class="login-form-card">
+        <label class="login-field-label">Verification Code</label>
+        <div class="login-otp-row">
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        </div>
+        <button class="login-btn-cta" id="loginVerifyOtpBtn">Verify →</button>
+        <p class="login-form-footer">
+          <span id="loginResendTimer" style="display:none;"></span>
+          <a href="#" id="loginResendBtn" style="display:none;">Resend OTP</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="recaptcha-container"></div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HELP MODAL — "Namaste! How can we help?" (P02)
+     ══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="helpModalOverlay">
+  <div class="help-modal">
+    <button class="help-modal__close" id="btnHelpClose" aria-label="Close">&#x2715;</button>
+
+    <!-- FSSAI logo -->
+    <div class="help-modal__logo">
+      <img src="{{ url_for('static', filename='images/fssai_logo.png') }}" alt="FSSAI" class="help-modal__logo-img" />
+    </div>
+
+    <h2 class="help-modal__title">Namaste! How can we help? 🙏</h2>
+    <p class="help-modal__sub">Tell us who you are and we'll guide you from here.</p>
+
+    <div class="help-options">
+      <!-- FBO — auth-aware routing handled in auth.js -->
+      <button class="help-option" id="btnHelpFbo">
+        <span class="help-option__icon">🧑‍🍳</span>
+        <div class="help-option__content">
+          <strong>Food Business (FBO)</strong>
+          <span>Apply, renew, or manage your FSSAI license</span>
+        </div>
+        <span class="help-option__arrow">→</span>
+      </button>
+
+      <a href="/consumer" class="help-option">
+        <span class="help-option__icon">👤</span>
+        <div class="help-option__content">
+          <strong>Consumer</strong>
+          <span>Check licenses, rate food safety, report issues</span>
+        </div>
+        <span class="help-option__arrow">→</span>
+      </a>
+
+      <a href="/agent" class="help-option">
+        <span class="help-option__icon">🤝</span>
+        <div class="help-option__content">
+          <strong>Agent / Facilitator</strong>
+          <span>Manage applications for multiple clients</span>
+        </div>
+        <span class="help-option__arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── CHATBOT FAB + PANEL ────────────────────────────────── -->
+<button class="chatbot-fab" id="chatbotFab" aria-label="Open Potato Assistant">🥔</button>
+
+<div class="chatbot-panel" id="chatbotPanel">
+  <div class="chatbot-panel__header">
+    <div class="avatar">🥔</div>
+    <div class="info">
+      <span class="name">Potato · Your FSSAI Guide</span>
+    </div>
+    <button class="chatbot-panel__close" id="chatbotClose" aria-label="Close">&#x2715;</button>
+  </div>
+  <div class="chatbot-messages" id="chatMessages"></div>
+  <div class="chatbot-chips" id="chatChips"></div>
+  <div class="chatbot-input-row">
+    <input type="text" id="chatInput" placeholder="Ask Potato anything…" autocomplete="off" maxlength="200">
+    <button id="chatSend" aria-label="Send">&#x279C;</button>
+  </div>
+  <a class="chatbot-footer" href="tel:18001121000">📞 Talk to a person (1800-112-100)</a>
+</div>
+
+<!-- ── SCRIPTS ────────────────────────────────────────────── -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+<script src="{{ url_for('static', filename='js/firebase-init.js') }}"></script>
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+<script src="{{ url_for('static', filename='js/global.js') }}"></script>
+{% block extra_js %}{% endblock %}
+
+</body>
+</html>

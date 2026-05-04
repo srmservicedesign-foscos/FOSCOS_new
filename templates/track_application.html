@@ -1,0 +1,69 @@
+{% extends "_base.html" %}
+
+{% block title %}Track Application — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fbo_portal.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="track-page">
+
+  <!-- ── Header ── -->
+  <div class="track-header">
+    <div class="track-header__inner">
+      <a href="/fbo-portal" class="track-header__back">← Back to Dashboard</a>
+      <div class="track-header__title">Track Your Application</div>
+      <div class="track-header__sub" id="trackSubHeading">Loading application details…</div>
+    </div>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="track-content">
+
+    <!-- ── Tabs ── -->
+    <div class="track-tabs">
+      <button class="track-tab active" data-tab="status">Application Status</button>
+      <button class="track-tab" data-tab="documents">Document Processing</button>
+      <button class="track-tab" data-tab="inspection">Inspection</button>
+      <button class="track-tab" data-tab="fostac">FoSTaC Training</button>
+    </div>
+
+    <!-- ── Tab: Application Status ── -->
+    <div class="track-tab-panel active" id="tab-status">
+      <div class="track-timeline" id="trackTimeline">
+        <div style="color:var(--text-muted);font-size:13px;">Loading…</div>
+      </div>
+    </div>
+
+    <!-- ── Tab: Document Processing ── -->
+    <div class="track-tab-panel" id="tab-documents">
+      <div class="track-doc-grid" id="trackDocGrid">
+        <div style="color:var(--text-muted);font-size:13px;">Loading…</div>
+      </div>
+    </div>
+
+    <!-- ── Tab: Inspection ── -->
+    <div class="track-tab-panel" id="tab-inspection">
+      <div class="track-placeholder-panel" id="trackInspectionPanel">
+        <div class="big-icon">🔍</div>
+        <div class="title">No Inspection Scheduled</div>
+        <div class="sub">An inspection may be scheduled by the reviewing officer depending on your license type and scale. You'll be notified via SMS when one is scheduled.</div>
+      </div>
+    </div>
+
+    <!-- ── Tab: FoSTaC Training ── -->
+    <div class="track-tab-panel" id="tab-fostac">
+      <div class="track-placeholder-panel">
+        <div class="big-icon">🎓</div>
+        <div class="title">FoSTaC Training</div>
+        <div class="sub">Food Safety Training and Certification (FoSTaC) is required for businesses with five or more employees. Enrol through the FSSAI-approved training partner portal.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/track_application.js') }}"></script>
+{% endblock %}

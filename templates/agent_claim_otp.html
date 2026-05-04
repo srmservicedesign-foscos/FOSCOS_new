@@ -1,0 +1,61 @@
+{% extends "_base.html" %}
+{% block title %}Client Confirmation — Agent Portal{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent_portal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <div class="agent-container--narrow">
+
+    <div style="margin-bottom:24px;">
+      <a href="/agent/add-client" class="agent-back">← Back</a>
+    </div>
+
+    <div class="agent-card">
+
+      <!-- OTP state -->
+      <div id="claimOtpState">
+        <div class="agent-auth-icon">📱</div>
+        <h1 class="agent-auth-title">Client Confirmation</h1>
+        <p class="agent-auth-sub">An OTP has been sent to your client's number. Ask them to share the code with you to confirm agent access.</p>
+
+        <div class="agent-mobile-badge" id="claimClientPhone">+91 ——————</div>
+
+        <div class="agent-otp-row">
+          <input class="claim-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+          <input class="claim-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+          <input class="claim-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+          <input class="claim-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+          <input class="claim-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+          <input class="claim-otp-digit" type="tel" maxlength="1" inputmode="numeric">
+        </div>
+
+        <p class="agent-error" id="claimOtpError"></p>
+        <button class="agent-btn-primary" id="claimVerifyBtn">Verify &amp; Link Client →</button>
+
+        <div class="agent-resend-row" style="margin-top:14px;">
+          <button class="agent-resend-btn" id="claimResendBtn" style="display:none;">Resend OTP</button>
+          <span id="claimResendTimer"></span>
+        </div>
+      </div>
+
+      <!-- Success state (hidden) -->
+      <div id="claimSuccessState" style="display:none;">
+        <div class="agent-success">
+          <div class="agent-success__icon">✅</div>
+          <div class="agent-success__title">Client Linked!</div>
+          <p class="agent-success__msg" id="claimSuccessMsg">Client has been added to your portfolio. You can now manage their applications.</p>
+          <a href="/agent/dashboard" class="agent-btn-primary" style="text-decoration:none;display:block;">Go to Dashboard →</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/agent_claim_otp.js') }}"></script>
+{% endblock %}

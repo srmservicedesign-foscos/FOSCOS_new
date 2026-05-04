@@ -1,0 +1,95 @@
+{% extends "_base.html" %}
+
+{% block title %}Upload Documents — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="reg-page">
+
+  <!-- ── Progress stepper ── -->
+  <div class="reg-stepper">
+    <div class="reg-stepper__inner">
+      <div class="reg-stepper__step">Profile</div>
+      <div class="reg-stepper__step">Details</div>
+      <div class="reg-stepper__step active">Documents</div>
+      <div class="reg-stepper__step">Review</div>
+    </div>
+  </div>
+
+  <!-- ── Top nav ── -->
+  <div class="reg-topnav">
+    <a href="/business-details" class="reg-back-btn">← Back</a>
+    <a href="/" class="reg-home-btn">🏠 Home</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="reg-content reg-fade-in">
+    <h1 class="reg-title">Upload your documents 📄</h1>
+    <p class="reg-sub">Based on your license type, here's what we need. PDF, JPG, or PNG — max 5 MB each.</p>
+
+    <div class="reg-docs-layout">
+
+      <!-- LEFT: progress + accordion -->
+      <div>
+        <!-- Progress bar -->
+        <div class="reg-docs-progress">
+          <div class="reg-docs-progress__bar-wrap">
+            <div class="reg-docs-progress__bar" id="docsProgressBar" style="width:0%;"></div>
+          </div>
+          <span class="reg-docs-progress__label" id="docsProgressLabel">0 of 0 uploaded</span>
+        </div>
+
+        <!-- Accordion list -->
+        <div class="reg-doc-accordion" id="docList">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- WhatsApp checklist -->
+        <a class="reg-whatsapp-btn" id="whatsappChecklistBtn" href="#" target="_blank" rel="noopener">
+          📲 Get document checklist on WhatsApp
+        </a>
+
+        <p class="reg-error" id="docsError" style="margin-top:12px;"></p>
+      </div>
+
+      <!-- RIGHT: sidebar -->
+      <div class="reg-docs-sidebar">
+
+        <!-- Accepted IDs -->
+        <div class="reg-docs-sidebar__box">
+          <div class="reg-docs-sidebar__title">Accepted Identity Proofs</div>
+          <ul class="reg-docs-sidebar__id-list">
+            <li>🪪 Aadhaar Card</li>
+            <li>📄 PAN Card</li>
+            <li>🛂 Passport</li>
+            <li>🗳️ Voter ID</li>
+            <li>🚗 Driving Licence</li>
+            <li>🏛️ Government employee ID</li>
+          </ul>
+        </div>
+
+        <!-- Upload progress -->
+        <div class="reg-docs-sidebar__box">
+          <div class="reg-docs-sidebar__title">Upload Progress</div>
+          <div class="reg-docs-upload-progress" id="uploadProgressList">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Continue button -->
+        <button class="reg-btn-cta" id="docsContinueBtn" style="width:100%;margin-top:4px;">
+          All done, continue →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/documents.js') }}"></script>
+{% endblock %}

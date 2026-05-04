@@ -1,0 +1,69 @@
+{% extends "officer/_base.html" %}
+
+{% block title %}Applications — FOSCOS Officer Portal{% endblock %}
+{% block nav_applications %}active{% endblock %}
+
+{% block content %}
+<div class="officer-page-header">
+  <div>
+    <h1 class="officer-page-title">Applications</h1>
+    <p class="officer-page-sub">Review and manage all submitted applications</p>
+  </div>
+</div>
+
+<!-- ── Filters ── -->
+<div class="officer-filters-bar">
+  <input class="officer-search-input" type="text" id="appSearch" placeholder="Search by name, app ID, or phone..." />
+
+  <select class="officer-filter-select" id="filterStatus">
+    <option value="">All Statuses</option>
+    <option value="submitted">Submitted</option>
+    <option value="documents_requested">Documents Requested</option>
+    <option value="inspection_scheduled">Inspection Scheduled</option>
+    <option value="inspection_complete">Inspection Complete</option>
+    <option value="final_review">Final Review</option>
+    <option value="approved">Approved</option>
+    <option value="rejected">Rejected</option>
+  </select>
+
+  <select class="officer-filter-select" id="filterTier">
+    <option value="">All Tiers</option>
+    <option value="temporary-basic">Basic Registration</option>
+    <option value="basic">State License (Basic)</option>
+    <option value="state">State License</option>
+    <option value="central">Central License</option>
+  </select>
+
+  <button class="officer-filter-clear" id="filterClearBtn">Clear filters</button>
+</div>
+
+<!-- ── Table ── -->
+<div class="officer-card">
+  <div class="officer-table-wrap">
+    <table class="officer-table" id="appsTable">
+      <thead>
+        <tr>
+          <th class="sortable" data-col="appId">App ID <span class="sort-icon">&#8597;</span></th>
+          <th class="sortable" data-col="displayName">Applicant <span class="sort-icon">&#8597;</span></th>
+          <th>Business Types</th>
+          <th>Tier</th>
+          <th class="sortable" data-col="applicationStatus">Status <span class="sort-icon">&#8597;</span></th>
+          <th class="sortable" data-col="submittedAt">Submitted <span class="sort-icon">&#8597;</span></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="appsTableBody">
+        <tr><td colspan="7" class="officer-table__empty">Loading applications...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="officer-table-footer">
+    <span id="appsCount" class="officer-table-count"></span>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/officer_applications.js') }}?v=1"></script>
+{% endblock %}

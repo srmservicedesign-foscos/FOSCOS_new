@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Officer Login — FOSCOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/officer_portal.css') }}?v=1" />
+</head>
+<body class="officer-login-body">
+
+  <div class="officer-login-wrap">
+    <div class="officer-login-card">
+
+      <div class="officer-login-brand">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="20" fill="#c8813a"/>
+          <path d="M20 8 L28 14 V22 L20 32 L12 22 V14 Z" fill="white" opacity="0.9"/>
+          <circle cx="20" cy="20" r="4" fill="#c8813a"/>
+        </svg>
+        <div>
+          <div class="officer-login-brand__name">FOSCOS</div>
+          <div class="officer-login-brand__sub">Food Safety Officer Portal</div>
+        </div>
+      </div>
+
+      <h1 class="officer-login-title">Sign in</h1>
+      <p class="officer-login-sub">Use your official FSSAI officer credentials.</p>
+
+      <form id="officerLoginForm" autocomplete="off">
+        <div class="officer-form-group">
+          <label class="officer-form-label" for="officerEmail">Email address</label>
+          <input class="officer-form-input" type="email" id="officerEmail" placeholder="officer@fssai.gov.in" required />
+        </div>
+        <div class="officer-form-group">
+          <label class="officer-form-label" for="officerPassword">Password</label>
+          <input class="officer-form-input" type="password" id="officerPassword" placeholder="••••••••" required />
+        </div>
+
+        <p class="officer-login-error" id="officerLoginError"></p>
+
+        <button class="officer-login-btn" type="submit" id="officerLoginBtn">Sign in &rarr;</button>
+      </form>
+
+      <p class="officer-login-help">Access issues? Contact your FSSAI system administrator.</p>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="{{ url_for('static', filename='js/firebase-init.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/officer_auth.js') }}?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+{% block title %}Agent Login — FoSCoS{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/agent_portal.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="agent-page">
+  <div class="agent-container--narrow">
+
+    <div style="margin-bottom:24px;">
+      <a href="/" class="agent-back">← Back to Home</a>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-auth-icon">🤝</div>
+      <h1 class="agent-auth-title">Agent Login</h1>
+      <p class="agent-auth-sub">Enter your registered mobile number to access the agent portal and manage client applications.</p>
+
+      <div class="agent-field">
+        <label class="agent-field__label" for="agentPhone">Mobile Number</label>
+        <div class="agent-field__input-wrap">
+          <span class="agent-field__prefix">+91</span>
+          <input type="tel" id="agentPhone" placeholder="10-digit number" maxlength="10" inputmode="numeric">
+        </div>
+      </div>
+
+      <p class="agent-error" id="agentLoginError"></p>
+      <button class="agent-btn-primary" id="agentSendOtpBtn">Send OTP →</button>
+
+      <div id="agentRecaptcha" style="margin-top:12px;"></div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/agent_login.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "_base.html" %}
+
+{% block title %}Register — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}" />
+{% endblock %}
+
+{% block content %}
+<main class="signup-page">
+  <div class="signup-container">
+
+    <a href="/" class="signup-back">← Back to Home</a>
+
+    <div class="signup-icon">📱</div>
+    <h1 class="signup-title">Please enter your number</h1>
+    <p class="signup-sub">Enter your number to register new application</p>
+
+    <!-- Instant License info strip -->
+    <button class="signup-info-strip" id="tlInfoStrip" type="button">
+      <span class="signup-info-strip__icon">⚡</span>
+      <div class="signup-info-strip__body">
+        <strong>Running a small stall or home kitchen?</strong>
+        <p id="tlInfoStripMsg">You may qualify for an Instant License (Temporary) — no inspection needed upfront.</p>
+      </div>
+      <span class="signup-info-strip__arrow">→</span>
+    </button>
+
+    <!-- Phone form -->
+    <div class="signup-form-card">
+      <label class="signup-field-label" for="signupPhoneInput">Mobile Number</label>
+      <div class="signup-phone-row">
+        <div class="signup-phone-prefix">+91</div>
+        <input
+          type="tel"
+          id="signupPhoneInput"
+          class="signup-phone-input"
+          placeholder="Enter 10-digit number"
+          maxlength="10"
+          inputmode="numeric"
+          pattern="[0-9]{10}"
+          autocomplete="tel-national"
+        />
+      </div>
+      <button class="signup-btn-cta" id="signupSendOtpBtn">Send OTP →</button>
+      <p class="signup-error" id="signupPhoneError"></p>
+    </div>
+
+  </div>
+</main>
+
+<!-- Separate reCAPTCHA container (avoids conflict with login modal's container) -->
+<div id="signup-recaptcha-container" style="display:none;"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+{% endblock %}

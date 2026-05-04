@@ -1,0 +1,147 @@
+{% extends "officer/_base.html" %}
+
+{% block title %}Application Detail — FOSCOS Officer Portal{% endblock %}
+{% block nav_applications %}active{% endblock %}
+
+{% block content %}
+
+<!-- ── P30 Header: business name + inline action buttons ── -->
+<div class="officer-detail-header">
+  <div class="officer-detail-header__meta">
+    <div class="biz-name" id="detailBizName">Loading…</div>
+    <div class="biz-sub" id="detailAppId">—</div>
+  </div>
+  <div class="officer-detail-actions">
+    <button class="officer-btn-return" id="btnAdvanceStep">⏩ Advance Step</button>
+    <button class="officer-btn-approve" id="btnApprove">✓ Approve</button>
+    <button class="officer-btn-flag" id="btnFlag">⚑ Flag</button>
+    <button class="officer-btn-return" id="btnReturn">↩ Return</button>
+    <a href="/officer/applications" class="officer-btn-return" style="text-decoration:none;">← All Applications</a>
+  </div>
+</div>
+
+<!-- ── Pipeline ── -->
+<div class="officer-pipeline" id="detailPipeline">
+  <div class="officer-pipeline__step" data-step="submitted">Submitted</div>
+  <div class="officer-pipeline__arrow">&#8594;</div>
+  <div class="officer-pipeline__step" data-step="documents_requested">Docs Review</div>
+  <div class="officer-pipeline__arrow">&#8594;</div>
+  <div class="officer-pipeline__step" data-step="inspection_scheduled">Inspection</div>
+  <div class="officer-pipeline__arrow">&#8594;</div>
+  <div class="officer-pipeline__step" data-step="final_review">Final Review</div>
+  <div class="officer-pipeline__arrow">&#8594;</div>
+  <div class="officer-pipeline__step" data-step="approved">Approved</div>
+</div>
+
+<!-- ── Two-column layout ── -->
+<div class="officer-detail-layout">
+
+  <!-- Left: Tabs -->
+  <div class="officer-card officer-detail-tabs-card">
+    <div class="officer-tabs" id="detailTabs">
+      <button class="officer-tab active" data-tab="business">Business Info</button>
+      <button class="officer-tab" data-tab="documents">Documents</button>
+      <button class="officer-tab" data-tab="audit">Audit Trail</button>
+      <button class="officer-tab" data-tab="flags">Flags</button>
+    </div>
+
+    <div class="officer-tab-panel active" id="tabBusiness">
+      <div class="officer-info-grid" id="businessInfoGrid">
+        <div class="officer-info-loading">Loading…</div>
+      </div>
+    </div>
+
+    <div class="officer-tab-panel" id="tabDocuments">
+      <div class="officer-docs-list" id="documentsList">
+        <div class="officer-info-loading">Loading…</div>
+      </div>
+    </div>
+
+    <div class="officer-tab-panel" id="tabAudit">
+      <div class="officer-audit-list" id="auditList">
+        <div class="officer-info-loading">Loading…</div>
+      </div>
+    </div>
+
+    <div class="officer-tab-panel" id="tabFlags">
+      <div class="officer-flags-list" id="flagsList">
+        <div class="officer-info-loading">No flags raised.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Status + Meta -->
+  <div class="officer-detail-actions-col">
+    <div class="officer-card officer-status-card">
+      <h3 class="officer-actions-card__title">Current Status</h3>
+      <div id="currentStatusBadge" class="officer-status-badge-lg"></div>
+      <div class="officer-meta-row"><span>Submitted</span><span id="metaSubmitted">—</span></div>
+      <div class="officer-meta-row"><span>Last updated</span><span id="metaUpdated">—</span></div>
+      <div class="officer-meta-row"><span>Tier</span><span id="metaTier">—</span></div>
+      <div class="officer-meta-row"><span>Fee</span><span id="metaFee">—</span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Action confirmation modal (Advance / Approve / Return / generic) ── -->
+<div class="officer-modal-overlay" id="actionModalOverlay">
+  <div class="officer-modal">
+    <h3 class="officer-modal__title" id="actionModalTitle">Confirm Action</h3>
+    <p class="officer-modal__body" id="actionModalBody"></p>
+    <textarea class="officer-modal__textarea" id="actionModalNote" placeholder="Add a note (optional)…" rows="3"></textarea>
+    <p class="officer-modal__error" id="actionModalError"></p>
+    <div class="officer-modal__footer">
+      <button class="officer-modal__cancel" id="actionModalCancel">Cancel</button>
+      <button class="officer-modal__confirm" id="actionModalConfirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── Flag an Issue modal (separate, with Issue Type + Priority) ── -->
+<div class="officer-modal-overlay" id="flagModalOverlay">
+  <div class="officer-modal">
+    <h3 class="officer-modal__title">Flag an Issue</h3>
+    <p class="officer-modal__body">Flag this application for internal review. The FBO will be notified.</p>
+
+    <div class="officer-modal__field">
+      <label for="flagIssueType">Issue Type</label>
+      <select id="flagIssueType">
+        <option value="">Select issue type…</option>
+        <option value="incomplete_documents">Incomplete Documents</option>
+        <option value="suspicious_information">Suspicious Information</option>
+        <option value="premises_concern">Premises Concern</option>
+        <option value="hygiene_risk">Hygiene Risk</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+
+    <div class="officer-modal__field">
+      <label for="flagPriority">Priority</label>
+      <select id="flagPriority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+        <option value="critical">Critical</option>
+      </select>
+    </div>
+
+    <div class="officer-modal__field">
+      <label for="flagNote">Notes</label>
+      <textarea id="flagNote" rows="3" placeholder="Describe the issue…"></textarea>
+    </div>
+
+    <p class="officer-modal__error" id="flagModalError"></p>
+    <div class="officer-modal__footer">
+      <button class="officer-modal__cancel" id="flagModalCancel">Cancel</button>
+      <button class="officer-modal__confirm officer-btn-flag" id="flagModalConfirm">Flag Application</button>
+    </div>
+  </div>
+</div>
+
+<script>window.__APP_ID__ = {{ app_id | tojson }};</script>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/officer_detail.js') }}?v=2"></script>
+{% endblock %}

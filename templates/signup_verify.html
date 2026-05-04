@@ -1,0 +1,80 @@
+{% extends "_base.html" %}
+
+{% block title %}Verify OTP — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}" />
+{% endblock %}
+
+{% block content %}
+<main class="signup-page">
+  <div class="signup-container">
+
+    <a href="/signup" class="signup-back">← Back</a>
+
+    <!-- ── OTP step ── -->
+    <div id="signupOtpStep">
+
+      <!-- Success banner (hidden until OTP verified) -->
+      <div id="signupVerifiedBanner" style="display:none;">
+        <div class="signup-icon">✅</div>
+        <h1 class="signup-title">Verified!</h1>
+        <p class="signup-sub">Loading your application…</p>
+      </div>
+
+      <!-- OTP form header (hidden after verification) -->
+      <div id="signupOtpHeader">
+        <div class="signup-icon">🔐</div>
+        <p class="signup-sub">OTP sent to <strong id="signupOtpPhone"></strong></p>
+      </div>
+
+      <div class="signup-form-card" id="signupOtpFormCard">
+        <label class="signup-field-label">Verification Code</label>
+        <div class="signup-otp-row">
+          <input class="signup-otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code" />
+          <input class="signup-otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="signup-otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="signup-otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="signup-otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+          <input class="signup-otp-digit" maxlength="1" type="text" inputmode="numeric" pattern="[0-9]" />
+        </div>
+        <button class="signup-btn-cta" id="signupVerifyOtpBtn">Verify &amp; Continue →</button>
+        <p class="signup-form-footer">
+          Didn't receive it?&nbsp;
+          <span id="signupResendTimer" style="display:none;"></span>
+          <a href="#" id="signupResendBtn" style="display:none;">Resend OTP</a>
+        </p>
+        <p class="signup-error" id="signupOtpError"></p>
+      </div>
+    </div>
+
+    <!-- ── Name step (shown after OTP verified) ── -->
+    <div id="signupNameStep" style="display:none;" class="signup-fade-in">
+      <div class="signup-icon">👤</div>
+      <h1 class="signup-title">One last step</h1>
+      <p class="signup-sub">Enter your name to complete your FOSCOS account</p>
+
+      <div class="signup-form-card">
+        <label class="signup-field-label" for="signupNameInput">Full Name</label>
+        <input
+          type="text"
+          id="signupNameInput"
+          class="signup-full-input"
+          placeholder="e.g. Rishi Shah"
+          autocomplete="name"
+          maxlength="60"
+        />
+        <button class="signup-btn-cta" id="signupSaveNameBtn">Create Account →</button>
+        <p class="signup-error" id="signupNameError"></p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- reCAPTCHA for resend OTP -->
+<div id="signup-resend-recaptcha" style="display:none;"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/signup_verify.js') }}"></script>
+{% endblock %}

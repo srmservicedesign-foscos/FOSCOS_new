@@ -1,0 +1,66 @@
+{% extends "_base.html" %}
+
+{% block title %}Application Submitted — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="submitted-page">
+  <div class="submitted-card">
+
+    <!-- Green checkmark -->
+    <div class="submitted-check-icon">✓</div>
+
+    <div class="submitted-card__title">Application Submitted!</div>
+    <div class="submitted-card__sub">
+      Your FSSAI license application has been received and is now under review.
+    </div>
+
+    <!-- Receipt card -->
+    <div class="submitted-receipt" style="margin-top:20px;">
+      <div class="submitted-receipt__header">Application Receipt</div>
+
+      <div class="submitted-receipt__section">
+        <div class="submitted-detail-row">
+          <span>Application ID</span>
+          <span id="submittedAppId" style="font-family:monospace;font-weight:700;">—</span>
+        </div>
+        <div class="submitted-detail-row">
+          <span>License Type</span>
+          <span id="sub-licenseType">—</span>
+        </div>
+        <div class="submitted-detail-row" style="color:var(--amber);">
+          <span>Expected Approval</span>
+          <span id="sub-expectedDate" style="font-weight:700;">~30 working days</span>
+        </div>
+        <div class="submitted-detail-row submitted-detail-row--total">
+          <span>Amount Paid</span>
+          <span id="sub-total">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 action buttons -->
+    <div class="submitted-actions">
+      <button class="submitted-action-btn submitted-action-btn--primary" id="btnDownloadReceipt">
+        ⬇ Download Receipt
+      </button>
+      <a class="submitted-action-btn submitted-action-btn--whatsapp" id="btnWhatsApp" href="#" target="_blank" rel="noopener">
+        📲 Share on WhatsApp
+      </a>
+      <a class="submitted-action-btn" href="/track-application">
+        🔍 Track Application
+      </a>
+      <a class="submitted-action-btn" href="/fbo-portal">
+        🏠 Go to Dashboard
+      </a>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/application_submitted.js') }}"></script>
+{% endblock %}

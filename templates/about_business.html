@@ -1,0 +1,164 @@
+{% extends "_base.html" %}
+
+{% block title %}About Your Business — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}?v=3" />
+{% endblock %}
+
+{% block content %}
+<div class="reg-page">
+
+  <!-- ── Progress stepper ── -->
+  <div class="reg-stepper">
+    <div class="reg-stepper__inner">
+      <div class="reg-stepper__step active">Profile</div>
+      <div class="reg-stepper__step">Details</div>
+      <div class="reg-stepper__step">Documents</div>
+      <div class="reg-stepper__step">Review</div>
+    </div>
+  </div>
+
+  <!-- ── Top nav ── -->
+  <div class="reg-topnav">
+    <a href="/" class="reg-home-btn">&#127968; Home</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="reg-content">
+    <h1 class="reg-title">Tell me about your business &#127869;</h1>
+    <p class="reg-sub">Where do you operate from? Pick everything that applies.</p>
+
+    <div class="reg-card-grid reg-card-grid--3" id="businessTypeGrid">
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="cart-thela">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#128666;</span>
+        <div class="reg-card__title">Cart / Thela</div>
+        <p class="reg-card__sub">Mobile or roadside stall</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="fixed-stall-kiosk">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127978;</span>
+        <div class="reg-card__title">Fixed Stall / Kiosk</div>
+        <p class="reg-card__sub">Permanent shop or counter</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="restaurant-cafe">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127869;</span>
+        <div class="reg-card__title">Restaurant / Café</div>
+        <p class="reg-card__sub">Dine-in or takeaway</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="dhaba">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127858;</span>
+        <div class="reg-card__title">Dhaba</div>
+        <p class="reg-card__sub">Highway or local eatery</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="cloud-kitchen">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#9729;&#65039;</span>
+        <div class="reg-card__title">Cloud Kitchen</div>
+        <p class="reg-card__sub">Delivery-only, no dine-in</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="food-truck">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#128666;</span>
+        <div class="reg-card__title">Food Truck</div>
+        <p class="reg-card__sub">Mobile kitchen on wheels</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="bakery">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#129360;</span>
+        <div class="reg-card__title">Bakery</div>
+        <p class="reg-card__sub">Bread, cakes, pastries</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="sweet-shop-mithai">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127854;</span>
+        <div class="reg-card__title">Sweet Shop / Mithai</div>
+        <p class="reg-card__sub">Laddoo, barfi, halwa, peda</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="catering-service">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127914;</span>
+        <div class="reg-card__title">Catering Service</div>
+        <p class="reg-card__sub">Events, weddings, functions</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="home-kitchen">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127968;</span>
+        <div class="reg-card__title">Home Kitchen</div>
+        <p class="reg-card__sub">Dabba, tiffin, home catering</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="packaged-food-mfg">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#128230;</span>
+        <div class="reg-card__title">Packaged Food Mfg.</div>
+        <p class="reg-card__sub">Branded / labelled products</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="warehouse-factory">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127981;</span>
+        <div class="reg-card__title">Warehouse / Factory</div>
+        <p class="reg-card__sub">Manufacturing or storage</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="canteen-mess">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127983;</span>
+        <div class="reg-card__title">Canteen / Mess</div>
+        <p class="reg-card__sub">Institution, office, hostel</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="pet-food-business">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#128062;</span>
+        <div class="reg-card__title">Pet Food Business</div>
+        <p class="reg-card__sub">Manufactured or traded</p>
+      </label>
+
+      <label class="reg-card">
+        <input type="checkbox" class="reg-card__input" value="wholesale-retailer">
+        <div class="reg-card__check">&#10003;</div>
+        <span class="reg-card__icon">&#127980;</span>
+        <div class="reg-card__title">Wholesale / Retailer</div>
+        <p class="reg-card__sub">Distributor, grocery, store</p>
+      </label>
+
+    </div>
+
+    <p class="reg-error" id="businessTypeError"></p>
+    <button class="reg-btn-cta" id="businessTypeContinueBtn">Sounds good, continue &rarr;</button>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/registration.js') }}?v=7"></script>
+{% endblock %}

@@ -1,0 +1,868 @@
+{% extends "_base.html" %}
+{% block title %}One Stop Shop &mdash; FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/one_stop_shop.css') }}?v=1" />
+{% endblock %}
+
+{% block content %}
+<div class="oss-page" id="ossPage">
+
+  <!-- ── Page header ── -->
+  <div class="oss-page-header">
+    <div class="oss-page-header__inner">
+      <div>
+        <h1 class="oss-page-title">One Stop Shop</h1>
+        <p class="oss-page-sub">Everything your food business needs to stay compliant &mdash; in one place.</p>
+      </div>
+      <div id="ossHeaderActions" class="oss-header-actions">
+        <!-- Skip / Continue injected by JS based on ?from=documents -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Auth banner (browse-only for logged-out users) ── -->
+  <div class="oss-auth-banner" id="ossAuthBanner" style="display:none;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span>Sign in to add items to your compliance cart and carry them through to payment.</span>
+    <button class="oss-auth-banner__btn" onclick="openLoginModal()">Sign in</button>
+  </div>
+
+  <!-- ── Tab navigation ── -->
+  <div class="oss-tabs-bar" id="ossTabsBar">
+    <div class="oss-tabs-inner">
+      <button class="oss-tab active" data-tab="water">&#128167; Water Testing</button>
+      <button class="oss-tab" data-tab="medical">&#127973; Medical Certificate</button>
+      <button class="oss-tab" data-tab="fire">&#128293; Fire Safety</button>
+      <button class="oss-tab" data-tab="kit">&#129514; Testing Kit</button>
+      <button class="oss-tab" data-tab="manual">&#128218; User Manual</button>
+      <button class="oss-tab" data-tab="hygiene">&#9989; Hygiene Check</button>
+    </div>
+  </div>
+
+  <!-- ── Tab panels ── -->
+  <div class="oss-panels" id="ossPanels">
+
+    <!-- ══ TAB 1: WATER TESTING ══ -->
+    <div class="oss-panel active" id="panelWater">
+      <div class="oss-panel-header">
+        <div>
+          <h2 class="oss-panel-title">Water Testing</h2>
+          <p class="oss-panel-sub">NABL-accredited laboratories test your water supply on-site. The report is filed directly into your application document slot.</p>
+        </div>
+        <div class="oss-price-note">&#8377;300 &ndash; &#8377;800</div>
+      </div>
+
+      <div class="oss-info-strip">
+        <span class="oss-info-strip__icon">&#8505;&#65039;</span>
+        <span>Recommended for all food businesses. Mandatory for businesses using water as a food ingredient (beverages, packaged water, ice manufacturing).</span>
+      </div>
+
+      <div class="oss-service-grid">
+
+        <div class="oss-service-card">
+          <div class="oss-service-card__body">
+            <div class="oss-service-card__name">Shillong Analytical Laboratory</div>
+            <div class="oss-service-card__meta">NABL Accredited &bull; 2.3 km away</div>
+            <div class="oss-service-card__tests">pH, Chlorine, Hardness, TDS, Coliform, Nitrate, Fluoride &mdash; 7-parameter panel</div>
+            <div class="oss-service-card__slot">&#128197; Next slot: <strong>Tomorrow, 10:00 AM</strong></div>
+          </div>
+          <div class="oss-service-card__aside">
+            <div class="oss-service-card__rating">&#9733; 4.8</div>
+            <div class="oss-service-card__price">&#8377;450</div>
+            <button class="oss-book-btn" data-book-type="water" data-service-id="sall" data-service-name="Shillong Analytical Laboratory" data-price="450">Book</button>
+          </div>
+        </div>
+
+        <div class="oss-service-card">
+          <div class="oss-service-card__body">
+            <div class="oss-service-card__name">Meghalaya Enviro Labs</div>
+            <div class="oss-service-card__meta">NABL Accredited &bull; 4.1 km away</div>
+            <div class="oss-service-card__tests">pH, Chlorine, Hardness, TDS, Coliform &mdash; 5-parameter panel</div>
+            <div class="oss-service-card__slot">&#128197; Next slot: <strong>Today, 3:00 PM</strong></div>
+          </div>
+          <div class="oss-service-card__aside">
+            <div class="oss-service-card__rating">&#9733; 4.6</div>
+            <div class="oss-service-card__price">&#8377;380</div>
+            <button class="oss-book-btn" data-book-type="water" data-service-id="mel" data-service-name="Meghalaya Enviro Labs" data-price="380">Book</button>
+          </div>
+        </div>
+
+        <div class="oss-service-card">
+          <div class="oss-service-card__body">
+            <div class="oss-service-card__name">GreenMark Testing Pvt. Ltd.</div>
+            <div class="oss-service-card__meta">NABL Accredited &bull; 6.8 km away</div>
+            <div class="oss-service-card__tests">Full panel: pH, Chlorine, Hardness, TDS, Coliform, Nitrate, Fluoride, Arsenic, Lead &mdash; 9-parameter</div>
+            <div class="oss-service-card__slot">&#128197; Next slot: <strong>In 3 days</strong></div>
+          </div>
+          <div class="oss-service-card__aside">
+            <div class="oss-service-card__rating">&#9733; 4.4</div>
+            <div class="oss-service-card__price">&#8377;620</div>
+            <button class="oss-book-btn" data-book-type="water" data-service-id="gmt" data-service-name="GreenMark Testing Pvt. Ltd." data-price="620">Book</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ TAB 2: MEDICAL CERTIFICATE ══ -->
+    <div class="oss-panel" id="panelMedical">
+      <div class="oss-panel-header">
+        <div>
+          <h2 class="oss-panel-title">Medical Certificate</h2>
+          <p class="oss-panel-sub">Health certificates for food handlers covering communicable disease screening, typhoid, hepatitis A &amp; E, and general fitness. Valid for 1 year.</p>
+        </div>
+        <div class="oss-price-note">&#8377;150 &ndash; &#8377;400 / person</div>
+      </div>
+
+      <div class="oss-info-strip">
+        <span class="oss-info-strip__icon">&#8505;&#65039;</span>
+        <span>Required for all staff who handle or prepare food. You can book for multiple staff members in a single appointment.</span>
+      </div>
+
+      <div class="oss-service-grid">
+
+        <div class="oss-service-card">
+          <div class="oss-service-card__body">
+            <div class="oss-service-card__name">Government Health Centre, Laban</div>
+            <div class="oss-service-card__meta">Govt. Registered &bull; 1.2 km away</div>
+            <div class="oss-service-card__tests">Typhoid, Hepatitis A &amp; E, Skin test, Blood group, General fitness</div>
+            <div class="oss-service-card__slot">&#128197; Next slot: <strong>Today, 4:00 PM</strong></div>
+          </div>
+          <div class="oss-service-card__aside">
+            <div class="oss-service-card__rating">&#9733; 4.7</div>
+            <div class="oss-service-card__price">&#8377;150 / person</div>
+            <button class="oss-book-btn" data-book-type="medical" data-service-id="ghc" data-service-name="Government Health Centre, Laban" data-price="150">Book</button>
+          </div>
+        </div>
+
+        <div class="oss-service-card">
+          <div class="oss-service-card__body">
+            <div class="oss-service-card__name">CarePoint Clinic</div>
+            <div class="oss-service-card__meta">Registered Clinic &bull; 3.0 km away</div>
+            <div class="oss-service-card__tests">Typhoid, Hepatitis A &amp; E, Skin test, Blood group, General fitness, Dental check</div>
+            <div class="oss-service-card__slot">&#128197; Next slot: <strong>Tomorrow, 9:30 AM</strong></div>
+          </div>
+          <div class="oss-service-card__aside">
+            <div class="oss-service-card__rating">&#9733; 4.5</div>
+            <div class="oss-service-card__price">&#8377;300 / person</div>
+            <button class="oss-book-btn" data-book-type="medical" data-service-id="cpc" data-service-name="CarePoint Clinic" data-price="300">Book</button>
+          </div>
+        </div>
+
+        <div class="oss-service-card">
+          <div class="oss-service-card__body">
+            <div class="oss-service-card__name">Apollo Diagnostics Centre</div>
+            <div class="oss-service-card__meta">NABH Accredited &bull; 5.5 km away</div>
+            <div class="oss-service-card__tests">Full panel: Typhoid, Hepatitis A/B/E, Skin, Stool culture, CBC, X-Ray, General fitness</div>
+            <div class="oss-service-card__slot">&#128197; Next slot: <strong>In 2 days</strong></div>
+          </div>
+          <div class="oss-service-card__aside">
+            <div class="oss-service-card__rating">&#9733; 4.9</div>
+            <div class="oss-service-card__price">&#8377;400 / person</div>
+            <button class="oss-book-btn" data-book-type="medical" data-service-id="adc" data-service-name="Apollo Diagnostics Centre" data-price="400">Book</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ TAB 3: FIRE SAFETY ══ -->
+    <div class="oss-panel" id="panelFire">
+      <div class="oss-panel-header">
+        <div>
+          <h2 class="oss-panel-title">Fire Safety NOC</h2>
+          <p class="oss-panel-sub">A No-Objection Certificate (NOC) from your local fire department is required for food premises with open-flame cooking, gas cylinders, or industrial equipment.</p>
+        </div>
+      </div>
+
+      <div class="oss-info-strip oss-info-strip--amber">
+        <span class="oss-info-strip__icon">&#128293;</span>
+        <span>Fire NOCs are issued directly by the Meghalaya Fire &amp; Emergency Services. FOSCOS connects you to the right office &mdash; the application and fee are handled by the department.</span>
+      </div>
+
+      <div class="oss-fire-layout">
+
+        <div class="oss-fire-checklist-card">
+          <h3 class="oss-fire-checklist-title">Pre-Inspection Checklist</h3>
+          <p class="oss-fire-checklist-sub">Ensure all items are in place before the fire officer visits. Incomplete premises will require a re-inspection.</p>
+
+          <ul class="oss-checklist" id="fireChecklist">
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Fire extinguishers installed</strong>
+                  <p>Minimum 2 ABC-type extinguishers (4 kg) for kitchens up to 50 sq. ft. One additional per 25 sq. ft. beyond that.</p>
+                </div>
+              </label>
+            </li>
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Emergency exit clearly marked</strong>
+                  <p>Exit signage illuminated and unobstructed at all times.</p>
+                </div>
+              </label>
+            </li>
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Fire blanket near cooking area</strong>
+                  <p>Wool-type fire blanket mounted within arm's reach of the primary cooking station.</p>
+                </div>
+              </label>
+            </li>
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Gas cylinders stored upright and chained</strong>
+                  <p>LPG cylinders secured in a ventilated area, not near a heat source.</p>
+                </div>
+              </label>
+            </li>
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Smoke detectors installed and tested</strong>
+                  <p>At least one detector per room; test by pressing the test button.</p>
+                </div>
+              </label>
+            </li>
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Electrical wiring inspected</strong>
+                  <p>No exposed wiring; MCB trip switches in place and labelled.</p>
+                </div>
+              </label>
+            </li>
+            <li class="oss-checklist__item">
+              <label class="oss-check-label">
+                <input type="checkbox" class="oss-check-input fire-check" />
+                <span class="oss-check-box"></span>
+                <div>
+                  <strong>Floor plan available</strong>
+                  <p>A basic sketch of your premises showing kitchen, exits, and gas storage location.</p>
+                </div>
+              </label>
+            </li>
+          </ul>
+
+          <div class="oss-checklist-progress-wrap">
+            <div class="oss-checklist-progress">
+              <div class="oss-checklist-progress__bar" id="fireProgressBar" style="width:0%"></div>
+            </div>
+            <p class="oss-checklist-progress__label" id="fireProgressLabel">0 of 7 items checked</p>
+          </div>
+        </div>
+
+        <div class="oss-fire-contact-card">
+          <div class="oss-fire-contact-card__icon">&#128293;</div>
+          <h3>Meghalaya Fire &amp; Emergency Services</h3>
+          <p>NOC applications are submitted in person at your nearest fire station with the completed checklist and premises floor plan.</p>
+
+          <div class="oss-fire-detail-row"><strong>Helpline:</strong> 101 &nbsp;/&nbsp; 0364-2226555</div>
+          <div class="oss-fire-detail-row"><strong>Office hours:</strong> Mon &ndash; Sat, 10:00 AM &ndash; 5:00 PM</div>
+          <div class="oss-fire-detail-row"><strong>Typical cost:</strong> &#8377;1,000 &ndash; &#8377;5,000 (paid to fire dept.)</div>
+          <div class="oss-fire-detail-row"><strong>Processing time:</strong> 7 &ndash; 15 working days</div>
+
+          <a href="tel:1078" class="oss-fire-cta-btn">&#128222; Contact Fire Department</a>
+          <p class="oss-fire-note">NOC fees are paid directly to the fire department. This service is not part of your FOSCOS cart.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ TAB 4: TESTING KIT ══ -->
+    <div class="oss-panel" id="panelKit">
+      <div class="oss-panel-header">
+        <div>
+          <h2 class="oss-panel-title">FSSAI Routine Safety Kit</h2>
+          <p class="oss-panel-sub">A physical kit for 11 on-site food adulteration tests. No lab needed &mdash; designed for daily use in your kitchen or stall.</p>
+        </div>
+        <div class="oss-price-note">&#8377;3,500</div>
+      </div>
+
+      <div class="oss-kit-layout">
+        <div class="oss-kit-card">
+          <div class="oss-kit-card__image-area">
+            <div class="oss-kit-card__icon">&#129514;</div>
+          </div>
+          <div class="oss-kit-card__body">
+            <h3 class="oss-kit-card__name">FSSAI Routine Safety Kit</h3>
+            <p class="oss-kit-card__desc">Approved by FSSAI. Contains everything needed to run 11 standardised on-site food safety tests. Ideal for street vendors, restaurant kitchens, and small food manufacturers.</p>
+
+            <div class="oss-kit-badges">
+              <span>&#128666; Delivered in 5 &ndash; 7 business days</span>
+              <span>&#10003; FSSAI Approved</span>
+              <span>&#10003; Free replacement on damage</span>
+            </div>
+
+            <div class="oss-kit-contents-title">Kit Contents &mdash; 11 Items</div>
+            <div class="oss-kit-grid">
+              <div class="oss-kit-item"><span class="oss-kit-num">1</span>Paraffin Liquid</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">2</span>Cotton Balls</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">3</span>Iodine Solution (1%)</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">4</span>Glass Dropper (Pipette)</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">5</span>Glass Beaker</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">6</span>Lactometer</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">7</span>Water Test Strips</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">8</span>Soak Lime (Calcium Hydroxide)</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">9</span>Glass Plate / Petri Dish</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">10</span>Neodymium Magnet</div>
+              <div class="oss-kit-item"><span class="oss-kit-num">11</span>Digital Thermometer</div>
+            </div>
+
+            <div class="oss-kit-cta-row">
+              <div class="oss-kit-price-big">&#8377;3,500</div>
+              <button class="oss-add-to-cart-btn" id="kitAddToCartBtn" data-item-id="fssai-safety-kit" data-item-name="FSSAI Routine Safety Kit" data-price="3500">
+                Add to Cart &#8594;
+              </button>
+            </div>
+            <p class="oss-kit-in-cart-note" id="kitInCartNote" style="display:none;">&#10003; Added to cart</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 5: USER MANUAL ══ -->
+    <div class="oss-panel" id="panelManual">
+      <div class="oss-panel-header">
+        <div>
+          <h2 class="oss-panel-title">User Manual</h2>
+          <p class="oss-panel-sub">Step-by-step guides for all 11 safety tests using the FSSAI Routine Safety Kit. Best used alongside the physical kit.</p>
+        </div>
+        <button class="oss-download-btn" id="manualDownloadBtn">&#11015;&#65039; Download PDF</button>
+      </div>
+
+      <div class="oss-manual-layout">
+
+        <!-- Vertical tab nav -->
+        <nav class="oss-manual-nav" aria-label="Manual modules">
+          <button class="oss-manual-tab active" data-module="water">
+            <span class="oss-manual-tab__icon">&#128167;</span>
+            <span>Water Quality</span>
+          </button>
+          <button class="oss-manual-tab" data-module="dairy">
+            <span class="oss-manual-tab__icon">&#129371;</span>
+            <span>Dairy Products</span>
+          </button>
+          <button class="oss-manual-tab" data-module="grains">
+            <span class="oss-manual-tab__icon">&#127807;</span>
+            <span>Grains</span>
+          </button>
+          <button class="oss-manual-tab" data-module="fruits">
+            <span class="oss-manual-tab__icon">&#129382;</span>
+            <span>Fruits &amp; Vegetables</span>
+          </button>
+          <button class="oss-manual-tab" data-module="spices">
+            <span class="oss-manual-tab__icon">&#127798;&#65039;</span>
+            <span>Spices &amp; Tea</span>
+          </button>
+          <button class="oss-manual-tab" data-module="oils">
+            <span class="oss-manual-tab__icon">&#129379;</span>
+            <span>Cooking Oils</span>
+          </button>
+        </nav>
+
+        <!-- Module content -->
+        <div class="oss-manual-content">
+
+          <!-- MODULE 1: WATER -->
+          <div class="oss-module active" id="moduleWater">
+            <div class="oss-module-header">
+              <h3 class="oss-module-title">Module 1 &mdash; Water Quality</h3>
+              <p class="oss-module-question">Is the water safe to use?</p>
+              <button class="oss-video-btn">&#9654;&#65039; Watch Video Guide</button>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Equipment Needed</h4>
+              <div class="oss-equipment-list">
+                <span class="oss-equip-tag">Water Test Strips</span>
+                <span class="oss-equip-tag">Fresh water sample</span>
+              </div>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Procedure</h4>
+              <ol class="oss-procedure-list">
+                <li>Collect a fresh water sample from the source you use for cooking, washing, or food preparation.</li>
+                <li>Dip the test strip into the sample for exactly <strong>2 seconds</strong>, then remove and hold horizontally.</li>
+                <li>Wait <strong>30 &ndash; 60 seconds</strong> without shaking or blotting the strip.</li>
+                <li>Compare the colour pads on the strip to the colour chart provided in the strip packaging.</li>
+              </ol>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">What to Look For</h4>
+              <div class="oss-result-grid">
+                <div class="oss-result-card oss-result-card--safe">
+                  <div class="oss-result-card__label">&#10003; Safe</div>
+                  <div class="oss-result-card__param">pH: 6.5 &ndash; 8.5</div>
+                  <p>Water is neutral to slightly alkaline. Safe for all food use.</p>
+                </div>
+                <div class="oss-result-card oss-result-card--safe">
+                  <div class="oss-result-card__label">&#10003; Safe</div>
+                  <div class="oss-result-card__param">Chlorine: 50 &ndash; 100 ppm</div>
+                  <p>Adequate for vegetable wash water. Confirms sanitisation is effective.</p>
+                </div>
+                <div class="oss-result-card oss-result-card--warn">
+                  <div class="oss-result-card__label">&#9888; Monitor</div>
+                  <div class="oss-result-card__param">Hardness: above 200 mg/L</div>
+                  <p>Very hard water causes scale buildup in kettles and equipment. Consider softening.</p>
+                </div>
+                <div class="oss-result-card oss-result-card--fail">
+                  <div class="oss-result-card__label">&#10005; Action Required</div>
+                  <div class="oss-result-card__param">pH: below 6.5 or above 8.5</div>
+                  <p>Acidic or highly alkaline water affects food safety and taste. Use filtered or bottled water and contact your water testing lab.</p>
+                </div>
+              </div>
+            </div>
+            <div class="oss-fssai-note"><strong>FSSAI Standard:</strong> Food Safety and Standards (Food Products Standards and Food Additives) Regulations, 2011 &mdash; Schedule IV: Drinking Water Standards.</div>
+          </div>
+
+          <!-- MODULE 2: DAIRY -->
+          <div class="oss-module" id="moduleDairy">
+            <div class="oss-module-header">
+              <h3 class="oss-module-title">Module 2 &mdash; Dairy Products</h3>
+              <p class="oss-module-question">Is the milk pure &mdash; or is water or starch added?</p>
+              <button class="oss-video-btn">&#9654;&#65039; Watch Video Guide</button>
+            </div>
+
+            <div class="oss-test-block">
+              <div class="oss-test-block__num">Test 1 of 2</div>
+              <h4 class="oss-test-block__title">Detecting Water Adulteration in Milk</h4>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Equipment Needed</h4>
+                <div class="oss-equipment-list">
+                  <span class="oss-equip-tag">Lactometer</span>
+                  <span class="oss-equip-tag">Tall measuring cylinder</span>
+                  <span class="oss-equip-tag">Milk sample</span>
+                </div>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Procedure</h4>
+                <ol class="oss-procedure-list">
+                  <li>Fill the measuring cylinder with the milk sample.</li>
+                  <li>Gently lower the lactometer into the milk and allow it to float freely without touching the sides.</li>
+                  <li>Wait for it to settle completely, then read the value at the surface of the milk (the meniscus level).</li>
+                  <li>Note: the standard reading is calibrated at 27&deg;C. Adjust if significantly warmer or colder.</li>
+                </ol>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">What to Look For</h4>
+                <div class="oss-result-grid">
+                  <div class="oss-result-card oss-result-card--safe">
+                    <div class="oss-result-card__label">&#10003; Pure</div>
+                    <div class="oss-result-card__param">Reading: 26 &ndash; 32</div>
+                    <p>Full-fat cow milk reads 26&ndash;32; richer buffalo milk may read higher. Normal range.</p>
+                  </div>
+                  <div class="oss-result-card oss-result-card--fail">
+                    <div class="oss-result-card__label">&#10005; Adulterated</div>
+                    <div class="oss-result-card__param">Reading: below 26</div>
+                    <p>Low reading indicates water dilution. Do not use for food preparation or sale.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="oss-test-block">
+              <div class="oss-test-block__num">Test 2 of 2</div>
+              <h4 class="oss-test-block__title">Detecting Starch in Milk or Paneer</h4>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Equipment Needed</h4>
+                <div class="oss-equipment-list">
+                  <span class="oss-equip-tag">Glass Beaker</span>
+                  <span class="oss-equip-tag">Dropper</span>
+                  <span class="oss-equip-tag">Iodine Solution (1%)</span>
+                  <span class="oss-equip-tag">Milk or paneer sample</span>
+                </div>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Procedure</h4>
+                <ol class="oss-procedure-list">
+                  <li>Add 2 &ndash; 3 ml of milk to the beaker. For paneer: dissolve a small piece in 5 ml of warm water.</li>
+                  <li>Using the dropper, add <strong>2 &ndash; 3 drops of 1% iodine solution</strong> directly to the sample.</li>
+                  <li>Observe the colour change within 30 seconds.</li>
+                </ol>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">What to Look For</h4>
+                <div class="oss-result-grid">
+                  <div class="oss-result-card oss-result-card--safe">
+                    <div class="oss-result-card__label">&#10003; Pure</div>
+                    <div class="oss-result-card__param">No colour change</div>
+                    <p>Sample remains off-white or slightly amber (iodine colour). No starch present.</p>
+                  </div>
+                  <div class="oss-result-card oss-result-card--fail">
+                    <div class="oss-result-card__label">&#10005; Adulterated</div>
+                    <div class="oss-result-card__param">Blue or blue-black colour</div>
+                    <p>Starch is present &mdash; a common adulterant used to thicken milk or increase paneer yield. Do not sell.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="oss-fssai-note"><strong>FSSAI Standard:</strong> FSSR 2011 &mdash; Part A, Regulation 2.1: Milk and Milk Products. Maximum permissible adulterants: nil.</div>
+          </div>
+
+          <!-- MODULE 3: GRAINS -->
+          <div class="oss-module" id="moduleGrains">
+            <div class="oss-module-header">
+              <h3 class="oss-module-title">Module 3 &mdash; Grains</h3>
+              <p class="oss-module-question">Is artificial colour added to rice or pulses?</p>
+              <button class="oss-video-btn">&#9654;&#65039; Watch Video Guide</button>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Equipment Needed</h4>
+              <div class="oss-equipment-list">
+                <span class="oss-equip-tag">Glass Plate</span>
+                <span class="oss-equip-tag">Soak Lime (Calcium Hydroxide / Chuna)</span>
+                <span class="oss-equip-tag">Rice or pulse sample</span>
+              </div>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Procedure</h4>
+              <ol class="oss-procedure-list">
+                <li>Take a teaspoon of rice or pulse on the glass plate and spread into a single layer.</li>
+                <li>Sprinkle a small amount of soaked lime (chuna / calcium hydroxide paste) directly onto the grains.</li>
+                <li>Observe any colour change on the grains within 1 &ndash; 2 minutes.</li>
+              </ol>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">What to Look For</h4>
+              <div class="oss-result-grid">
+                <div class="oss-result-card oss-result-card--safe">
+                  <div class="oss-result-card__label">&#10003; Pure</div>
+                  <div class="oss-result-card__param">No colour change</div>
+                  <p>Grains retain their natural colour. No artificial colouring present.</p>
+                </div>
+                <div class="oss-result-card oss-result-card--fail">
+                  <div class="oss-result-card__label">&#10005; Adulterated</div>
+                  <div class="oss-result-card__param">Red or pink colour appears</div>
+                  <p>Turmeric or Metanil Yellow (artificial colour) has been added &mdash; a banned practice particularly found in sella (parboiled) rice. Do not sell.</p>
+                </div>
+              </div>
+            </div>
+            <div class="oss-fssai-note"><strong>FSSAI Standard:</strong> FSSR 2011 &mdash; Part A, Regulation 2.4: Cereals, Pulses and Products. Artificial colouring of grains is strictly prohibited.</div>
+          </div>
+
+          <!-- MODULE 4: FRUITS & VEGETABLES -->
+          <div class="oss-module" id="moduleFruits">
+            <div class="oss-module-header">
+              <h3 class="oss-module-title">Module 4 &mdash; Fruits &amp; Vegetables</h3>
+              <p class="oss-module-question">Are vegetables coated with artificial dye?</p>
+              <button class="oss-video-btn">&#9654;&#65039; Watch Video Guide</button>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Equipment Needed</h4>
+              <div class="oss-equipment-list">
+                <span class="oss-equip-tag">Paraffin Liquid</span>
+                <span class="oss-equip-tag">Cotton Balls</span>
+                <span class="oss-equip-tag">Test vegetables (chilli, bitter gourd, or sweet potato)</span>
+              </div>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Procedure</h4>
+              <ol class="oss-procedure-list">
+                <li>Soak a cotton ball thoroughly in paraffin liquid.</li>
+                <li>Firmly rub the outer surface of the vegetable skin &mdash; focus on green skin (chilli, bitter gourd) or red skin (sweet potato).</li>
+                <li>Observe the colour absorbed by the cotton ball.</li>
+              </ol>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">What to Look For</h4>
+              <div class="oss-result-grid">
+                <div class="oss-result-card oss-result-card--safe">
+                  <div class="oss-result-card__label">&#10003; Natural</div>
+                  <div class="oss-result-card__param">No colour on cotton ball</div>
+                  <p>Natural vegetables do not transfer colour. Safe to use.</p>
+                </div>
+                <div class="oss-result-card oss-result-card--fail">
+                  <div class="oss-result-card__label">&#10005; Dye Detected</div>
+                  <div class="oss-result-card__param">Bright green or red on cotton</div>
+                  <p>Malachite Green or Rhodamine B detected &mdash; both are banned carcinogenic dyes. Do not purchase or sell.</p>
+                </div>
+              </div>
+            </div>
+            <div class="oss-fssai-note"><strong>FSSAI Standard:</strong> FSSR 2011 &mdash; Part A, Regulation 2.3. Use of Malachite Green and Rhodamine B is a criminal offence under the Food Safety and Standards Act, 2006.</div>
+          </div>
+
+          <!-- MODULE 5: SPICES -->
+          <div class="oss-module" id="moduleSpices">
+            <div class="oss-module-header">
+              <h3 class="oss-module-title">Module 5 &mdash; Spices &amp; Tea</h3>
+              <p class="oss-module-question">Are iron filings present in spices or tea?</p>
+              <button class="oss-video-btn">&#9654;&#65039; Watch Video Guide</button>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Equipment Needed</h4>
+              <div class="oss-equipment-list">
+                <span class="oss-equip-tag">Neodymium Magnet</span>
+                <span class="oss-equip-tag">Glass Plate</span>
+                <span class="oss-equip-tag">Tea leaves or dry spice powder</span>
+              </div>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">Procedure</h4>
+              <ol class="oss-procedure-list">
+                <li>Spread the tea leaves or spice powder in a thin, even layer on the glass plate.</li>
+                <li>Slowly move the neodymium magnet through and just above the sample in a sweeping motion.</li>
+                <li>Observe the magnet closely for any particles clinging to it.</li>
+                <li>Lift the magnet away and tap gently &mdash; iron filings will remain stuck while natural particles fall off.</li>
+              </ol>
+            </div>
+            <div class="oss-module-section">
+              <h4 class="oss-module-section-title">What to Look For</h4>
+              <div class="oss-result-grid">
+                <div class="oss-result-card oss-result-card--safe">
+                  <div class="oss-result-card__label">&#10003; Pure</div>
+                  <div class="oss-result-card__param">Nothing clings to magnet</div>
+                  <p>Natural spices and tea do not contain iron. No adulteration detected.</p>
+                </div>
+                <div class="oss-result-card oss-result-card--fail">
+                  <div class="oss-result-card__label">&#10005; Adulterated</div>
+                  <div class="oss-result-card__param">Iron particles cling to magnet</div>
+                  <p>Iron filings added to increase weight &mdash; a common weight fraud. Consumption of iron filings is a health hazard. Do not sell.</p>
+                </div>
+              </div>
+            </div>
+            <div class="oss-fssai-note"><strong>FSSAI Standard:</strong> FSSR 2011 &mdash; Part A, Regulation 2.9: Spices and Condiments. Iron filings are classified as a metallic contaminant and are strictly prohibited.</div>
+          </div>
+
+          <!-- MODULE 6: OILS -->
+          <div class="oss-module" id="moduleOils">
+            <div class="oss-module-header">
+              <h3 class="oss-module-title">Module 6 &mdash; Cooking Oils</h3>
+              <p class="oss-module-question">Is the cooking oil adulterated with solid fat or starch?</p>
+              <button class="oss-video-btn">&#9654;&#65039; Watch Video Guide</button>
+            </div>
+
+            <div class="oss-test-block">
+              <div class="oss-test-block__num">Test 1 of 2</div>
+              <h4 class="oss-test-block__title">Detecting Solid Fat (Vanaspati) in Cooking Oil</h4>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Equipment Needed</h4>
+                <div class="oss-equipment-list">
+                  <span class="oss-equip-tag">Glass Plate</span>
+                  <span class="oss-equip-tag">Refrigerator or bowl of ice water</span>
+                  <span class="oss-equip-tag">Cooking oil sample</span>
+                </div>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Procedure</h4>
+                <ol class="oss-procedure-list">
+                  <li>Place a few drops of the cooking oil on the glass plate.</li>
+                  <li>Place the glass plate in a refrigerator for <strong>2 hours</strong>, or hold it above a bowl of ice water for <strong>20 minutes</strong>.</li>
+                  <li>Remove and observe the oil without disturbing it.</li>
+                </ol>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">What to Look For</h4>
+                <div class="oss-result-grid">
+                  <div class="oss-result-card oss-result-card--safe">
+                    <div class="oss-result-card__label">&#10003; Pure</div>
+                    <div class="oss-result-card__param">Remains liquid or slightly hazy</div>
+                    <p>Pure vegetable oils (sunflower, groundnut, soybean) stay liquid or become slightly viscous when cold. This is normal.</p>
+                  </div>
+                  <div class="oss-result-card oss-result-card--fail">
+                    <div class="oss-result-card__label">&#10005; Adulterated</div>
+                    <div class="oss-result-card__param">Solidifies or turns grainy white</div>
+                    <p>Vanaspati (hydrogenated vegetable fat) or solid fat has been added. Do not use or sell.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="oss-module-note">&#9888; <strong>Note:</strong> Coconut oil naturally solidifies below 25&deg;C. Do not apply this test to coconut oil &mdash; it will always produce a false positive.</div>
+            </div>
+
+            <div class="oss-test-block">
+              <div class="oss-test-block__num">Test 2 of 2</div>
+              <h4 class="oss-test-block__title">Detecting Starch in Flavoured or Coconut Oil</h4>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Equipment Needed</h4>
+                <div class="oss-equipment-list">
+                  <span class="oss-equip-tag">Glass Beaker</span>
+                  <span class="oss-equip-tag">Dropper</span>
+                  <span class="oss-equip-tag">Iodine Solution (1%)</span>
+                  <span class="oss-equip-tag">Oil sample and water</span>
+                </div>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">Procedure</h4>
+                <ol class="oss-procedure-list">
+                  <li>Add 1 ml of oil to 5 ml of water in the glass beaker. Stir vigorously for 10 seconds.</li>
+                  <li>Using the dropper, add <strong>2 &ndash; 3 drops of 1% iodine solution</strong> to the mixture.</li>
+                  <li>Allow the oil and water to separate, then observe the colour in the water layer only.</li>
+                </ol>
+              </div>
+              <div class="oss-module-section">
+                <h4 class="oss-module-section-title">What to Look For</h4>
+                <div class="oss-result-grid">
+                  <div class="oss-result-card oss-result-card--safe">
+                    <div class="oss-result-card__label">&#10003; Pure</div>
+                    <div class="oss-result-card__param">Water layer: pale amber</div>
+                    <p>Water layer remains pale yellow or amber (the natural colour of diluted iodine). No starch present in the oil.</p>
+                  </div>
+                  <div class="oss-result-card oss-result-card--fail">
+                    <div class="oss-result-card__label">&#10005; Adulterated</div>
+                    <div class="oss-result-card__param">Water layer: blue or blue-black</div>
+                    <p>Starch or flour paste added to increase viscosity &mdash; particularly found in adulterated coconut and flavoured oils. Do not sell.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="oss-fssai-note"><strong>FSSAI Standard:</strong> FSSR 2011 &mdash; Part A, Regulation 2.2: Edible Fats and Oils. Addition of vanaspati to refined vegetable oils without labelling declaration is prohibited. Starch adulteration is prohibited under all circumstances.</div>
+          </div>
+
+        </div><!-- .oss-manual-content -->
+      </div><!-- .oss-manual-layout -->
+    </div><!-- #panelManual -->
+
+    <!-- ══ TAB 6: HYGIENE CHECK ══ -->
+    <div class="oss-panel" id="panelHygiene">
+      <div class="oss-panel-header">
+        <div>
+          <h2 class="oss-panel-title">Hygiene Check</h2>
+          <p class="oss-panel-sub">A verified hygiene audit for your food business. Receive an official Hygiene Badge, avoid surprise FSSAI inspections, and stay compliant year-round.</p>
+        </div>
+      </div>
+
+      <div class="oss-info-strip">
+        <span class="oss-info-strip__icon">&#9989;</span>
+        <span>First inspection scheduled within 7 days of subscription. You will receive a physical Hygiene Badge certificate upon passing.</span>
+      </div>
+
+      <div class="oss-plans-grid">
+
+        <div class="oss-plan-card" id="planMonthly">
+          <div class="oss-plan-badge">Most Flexible</div>
+          <div class="oss-plan-price">&#8377;1,000 <span>/ month</span></div>
+          <div class="oss-plan-name">Monthly Subscription</div>
+          <ul class="oss-plan-features">
+            <li>&#10003; Monthly hygiene audit visit</li>
+            <li>&#10003; Verified Hygiene Badge</li>
+            <li>&#10003; Written inspection report</li>
+            <li>&#10003; FSSAI inspection alert</li>
+            <li>&#10003; Cancel anytime</li>
+          </ul>
+          <button class="oss-plan-btn" data-plan="monthly" data-plan-name="Hygiene Check (Monthly)" data-price="1000">Subscribe &rarr;</button>
+        </div>
+
+        <div class="oss-plan-card oss-plan-card--featured" id="planAnnual">
+          <div class="oss-plan-badge oss-plan-badge--featured">Best Value &mdash; Save &#8377;2,400</div>
+          <div class="oss-plan-price">&#8377;9,600 <span>/ year</span></div>
+          <div class="oss-plan-name">Annual Subscription</div>
+          <ul class="oss-plan-features">
+            <li>&#10003; Monthly hygiene audit visits</li>
+            <li>&#10003; Verified Hygiene Badge (framed)</li>
+            <li>&#10003; Written inspection reports</li>
+            <li>&#10003; FSSAI inspection alert</li>
+            <li>&#10003; Priority scheduling</li>
+            <li>&#10003; Export audit history</li>
+            <li>&#10003; 2 free re-inspections</li>
+          </ul>
+          <button class="oss-plan-btn oss-plan-btn--featured" data-plan="annual" data-plan-name="Hygiene Check (Annual)" data-price="9600">Subscribe &rarr;</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- .oss-panels -->
+
+  <!-- ── Sticky cart bar ── -->
+  <div class="oss-cart-bar" id="ossCartBar" style="display:none;">
+    <div class="oss-cart-bar__inner">
+      <div class="oss-cart-bar__items" id="ossCartItems"></div>
+      <div class="oss-cart-bar__right">
+        <span class="oss-cart-bar__total">Total: <strong id="ossCartTotal">&#8377;0</strong></span>
+        <button class="oss-cart-bar__btn" id="ossReviewPayBtn">Review &amp; Pay &#8594;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Booking modal (Water Testing + Medical Certificate) ── -->
+  <div class="oss-modal-overlay" id="ossBookingOverlay">
+    <div class="oss-modal">
+      <button class="oss-modal__close" id="ossBookingClose">&times;</button>
+      <div id="ossBookingForm">
+        <h3 class="oss-modal__title" id="ossBookingTitle">Book Appointment</h3>
+        <p class="oss-modal__sub" id="ossBookingSub"></p>
+
+        <div class="oss-modal-field">
+          <label class="oss-modal-label" for="ossBookingDate">Select Date</label>
+          <input type="date" class="oss-modal-input" id="ossBookingDate" />
+        </div>
+
+        <div class="oss-modal-field">
+          <label class="oss-modal-label">Select Time Slot</label>
+          <div class="oss-time-slots" id="ossTimeSlots">
+            <button type="button" class="oss-time-slot" data-time="09:00 AM">9:00 AM</button>
+            <button type="button" class="oss-time-slot" data-time="11:00 AM">11:00 AM</button>
+            <button type="button" class="oss-time-slot" data-time="02:00 PM">2:00 PM</button>
+            <button type="button" class="oss-time-slot" data-time="04:00 PM">4:00 PM</button>
+          </div>
+        </div>
+
+        <div class="oss-modal-field" id="ossStaffField" style="display:none;">
+          <label class="oss-modal-label">Number of Staff</label>
+          <div class="oss-qty-row">
+            <button type="button" class="oss-qty-btn" id="ossQtyMinus">&#8722;</button>
+            <span class="oss-qty-val" id="ossQtyVal">1</span>
+            <button type="button" class="oss-qty-btn" id="ossQtyPlus">&#43;</button>
+            <span class="oss-qty-hint" id="ossQtyHint"></span>
+          </div>
+        </div>
+
+        <div class="oss-modal-total-row">
+          Total: <strong id="ossBookingTotal"></strong>
+        </div>
+
+        <p class="oss-modal__error" id="ossBookingError"></p>
+        <button type="button" class="oss-modal-cta" id="ossBookingConfirm">Confirm Booking &rarr;</button>
+      </div>
+
+      <div class="oss-modal-success" id="ossBookingSuccess" style="display:none;">
+        <div class="oss-modal-success__icon">&#10003;</div>
+        <h3 class="oss-modal-success__title">Booking Confirmed!</h3>
+        <p class="oss-modal-success__body" id="ossBookingSuccessMsg"></p>
+        <button type="button" class="oss-modal-cta" id="ossBookingDone">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Hygiene subscription modal ── -->
+  <div class="oss-modal-overlay" id="ossHygieneOverlay">
+    <div class="oss-modal">
+      <button class="oss-modal__close" id="ossHygieneClose">&times;</button>
+      <div id="ossHygieneForm">
+        <h3 class="oss-modal__title" id="ossHygieneTitle">Subscribe to Hygiene Check</h3>
+        <p class="oss-modal__sub" id="ossHygieneSub"></p>
+        <div class="oss-modal-total-row">First payment: <strong id="ossHygieneTotal"></strong></div>
+        <ul class="oss-modal-confirm-features" id="ossHygieneFeatures"></ul>
+        <p class="oss-modal__error" id="ossHygieneError"></p>
+        <button type="button" class="oss-modal-cta" id="ossHygieneConfirm">Confirm Subscription &rarr;</button>
+      </div>
+      <div class="oss-modal-success" id="ossHygieneSuccess" style="display:none;">
+        <div class="oss-modal-success__icon">&#10003;</div>
+        <h3 class="oss-modal-success__title">Subscribed!</h3>
+        <p class="oss-modal-success__body">Added to your cart. First inspection scheduled within 7 days of payment.</p>
+        <button type="button" class="oss-modal-cta" id="ossHygieneDone">Done</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- .oss-page -->
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/one_stop_shop.js') }}?v=1"></script>
+{% endblock %}

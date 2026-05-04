@@ -1,0 +1,145 @@
+{% extends "_base.html" %}
+{% block title %}Check Eligibility — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Progress Rail -->
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab active">INFO</span>
+    <span class="tl-rail__tab">LOCATION</span>
+    <span class="tl-rail__tab">DOCS</span>
+    <span class="tl-rail__tab">FOOD</span>
+    <span class="tl-rail__tab">RULES</span>
+    <span class="tl-rail__tab">LICENSE</span>
+    <span class="tl-rail__tab">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <!-- Step header -->
+    <div class="tl-step-header">
+      <a href="/" class="tl-back">← Home</a>
+      <span class="tl-step-badge tl-step-badge--green">✅ Step 1 of 8 — Eligibility</span>
+    </div>
+
+    <h1 class="tl-title">Let's check your eligibility ⚡</h1>
+    <p class="tl-subtitle">Answer 3 quick questions to see if you qualify for an instant Temporary License. Available for street vendors, home kitchens and event stalls.</p>
+
+    <!-- Q1: Setup type -->
+    <div class="tl-card">
+      <div class="tl-question">1. What kind of setup do you have?</div>
+      <div class="tl-setup-grid">
+        <button class="tl-setup-card" data-type="cart">
+          <span class="tl-setup-card__icon">🛺</span>
+          <span class="tl-setup-card__label">Cart / Thela</span>
+        </button>
+        <button class="tl-setup-card" data-type="stall">
+          <span class="tl-setup-card__icon">🏪</span>
+          <span class="tl-setup-card__label">Fixed Stall</span>
+        </button>
+        <button class="tl-setup-card" data-type="home">
+          <span class="tl-setup-card__icon">🏠</span>
+          <span class="tl-setup-card__label">Home Kitchen</span>
+        </button>
+        <button class="tl-setup-card" data-type="tiffin">
+          <span class="tl-setup-card__icon">🍱</span>
+          <span class="tl-setup-card__label">Tiffin Service</span>
+        </button>
+        <button class="tl-setup-card" data-type="juice">
+          <span class="tl-setup-card__icon">🥤</span>
+          <span class="tl-setup-card__label">Juice / Beverage</span>
+        </button>
+        <button class="tl-setup-card" data-type="other">
+          <span class="tl-setup-card__icon">+</span>
+          <span class="tl-setup-card__label">Other</span>
+        </button>
+      </div>
+      <div id="tlOtherWrap" style="display:none;margin-top:14px;">
+        <input type="text" id="tlOtherType" class="tl-field__input" placeholder="Describe your setup (e.g. Cloud Kitchen, Pop-up Stall, Catering Unit…)">
+      </div>
+    </div>
+
+    <!-- Q2: Turnover calculator -->
+    <div class="tl-card">
+      <div class="tl-question">2. What is your approximate annual turnover?</div>
+      <div class="tl-calc__row">
+        <div class="tl-calc__field">
+          <label class="tl-calc__label" for="tlDailyRevenue">Daily Revenue</label>
+          <div class="tl-calc__input-wrap">
+            <span class="tl-calc__prefix">₹</span>
+            <input type="number" id="tlDailyRevenue" class="tl-calc__input" placeholder="500" min="0">
+          </div>
+        </div>
+        <div class="tl-calc__field">
+          <label class="tl-calc__label" for="tlDaysPerWeek">Days / Week</label>
+          <input type="number" id="tlDaysPerWeek" class="tl-calc__input--plain" placeholder="6" min="1" max="7">
+        </div>
+      </div>
+      <div class="tl-calc__result" id="tlCalcResult" style="display:none;">
+        <div class="tl-calc__result-label">Estimated Annual Turnover</div>
+        <div class="tl-calc__result-val" id="tlCalcVal">—</div>
+        <div class="tl-calc__result-note" id="tlCalcNote"></div>
+      </div>
+    </div>
+
+    <!-- Q3: Food items -->
+    <div class="tl-card">
+      <div class="tl-question">3. What food items do you primarily sell?</div>
+      <div class="tl-chips" id="tlFoodChips">
+        <button class="tl-chip" data-food="snacks">📦 Packaged Snacks</button>
+        <button class="tl-chip" data-food="tea">☕ Tea / Coffee</button>
+        <button class="tl-chip" data-food="roasted">🌽 Roasted Items</button>
+        <button class="tl-chip" data-food="bakery">🍞 Bakery (no cream)</button>
+        <button class="tl-chip" data-food="fruits">🥦 Fruits &amp; Vegetables</button>
+        <button class="tl-chip" data-food="cooked">🍲 Cooked Meals</button>
+        <button class="tl-chip" data-food="sweets">🍬 Sweets / Mithai</button>
+        <button class="tl-chip" data-food="juices">🥤 Fresh Juices</button>
+        <button class="tl-chip tl-chip--restricted" data-food="meat">🥩 Meat / Fish</button>
+        <button class="tl-chip tl-chip--restricted" data-food="dairy">🥛 Dairy Products</button>
+      </div>
+    </div>
+
+    <button class="tl-btn-primary tl-btn-full" id="tlCheckBtn" style="margin-top:8px;">Check My Eligibility →</button>
+
+  </div>
+</div>
+
+<!-- Eligible modal -->
+<div class="tl-modal-overlay" id="tlEligibleModal" style="display:none;">
+  <div class="tl-modal">
+    <div class="tl-modal__icon">🎉</div>
+    <h2 class="tl-modal__title">You Qualify!</h2>
+    <p class="tl-modal__body">Great news — you are eligible for a <strong>Temporary Food License</strong>. It will be issued instantly after you complete the next steps.</p>
+    <div class="tl-modal__perks">
+      <div class="tl-modal__perk">✅ Instant license issuance</div>
+      <div class="tl-modal__perk">✅ 30-day stall license or 60-day business license</div>
+      <div class="tl-modal__perk">✅ Operate legally from Day 1</div>
+      <div class="tl-modal__perk">✅ Upgrade path to permanent license (if needed)</div>
+    </div>
+    <button class="tl-btn-primary tl-btn-full" id="tlEligibleContinue">Continue →</button>
+  </div>
+</div>
+
+<!-- Ineligible modal -->
+<div class="tl-modal-overlay" id="tlIneligibleModal" style="display:none;">
+  <div class="tl-modal">
+    <div class="tl-modal__icon">ℹ️</div>
+    <h2 class="tl-modal__title">Different License Needed</h2>
+    <p class="tl-modal__body" id="tlIneligibleMsg"></p>
+    <a href="/about-business" class="tl-btn-primary tl-btn-full">Apply for Correct License →</a>
+    <button class="tl-btn-ghost tl-btn-full" id="tlIneligibleBack" style="margin-top:10px;">← Go Back</button>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_eligibility.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "_base.html" %}
+
+{% block title %}Business Scale — FOSCOS{% endblock %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registration.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="reg-page">
+
+  <!-- ── Progress stepper ── -->
+  <div class="reg-stepper">
+    <div class="reg-stepper__inner">
+      <div class="reg-stepper__step active">Profile</div>
+      <div class="reg-stepper__step">Details</div>
+      <div class="reg-stepper__step">Documents</div>
+      <div class="reg-stepper__step">Review</div>
+    </div>
+  </div>
+
+  <!-- ── Top nav ── -->
+  <div class="reg-topnav">
+    <a href="/food-type" class="reg-back-btn">← Back</a>
+    <a href="/" class="reg-home-btn">🏠 Home</a>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="reg-content reg-fade-in">
+    <h1 class="reg-title">How big is your food business? 📊</h1>
+    <p class="reg-sub">Enter your approximate daily sales — we'll calculate your annual turnover and recommend the right license type.</p>
+
+    <div class="reg-two-col">
+
+      <!-- LEFT: Calculator inputs -->
+      <div>
+        <div class="reg-form-card">
+
+          <p class="reg-section-label">Average Daily Revenue</p>
+          <div class="reg-scale-field">
+            <div class="reg-scale-input-row">
+              <div class="reg-scale-prefix">₹</div>
+              <input type="number" id="dailyRevenue" placeholder="e.g. 5000" min="0" inputmode="numeric" />
+              <button class="reg-mic-btn" title="Voice input (coming soon)">🎙️</button>
+            </div>
+            <button class="reg-listen-btn">▶ Listen in your language</button>
+          </div>
+
+          <p class="reg-section-label" style="margin-top:20px;">Days you operate per week</p>
+          <div class="reg-scale-field">
+            <div class="reg-scale-input-row">
+              <input type="number" id="daysPerWeekInput" min="1" max="7" value="6" inputmode="numeric"
+                style="border-radius:10px; border-left:1.5px solid #d4cec4;" />
+              <span style="font-size:13px;color:var(--text-muted);white-space:nowrap;">days / week</span>
+              <button class="reg-mic-btn" title="Voice input (coming soon)">🎙️</button>
+            </div>
+          </div>
+
+          <p class="reg-section-label" style="margin-top:20px;">Active months per year</p>
+          <div class="reg-scale-field">
+            <div class="reg-scale-input-row">
+              <input type="number" id="monthsPerYear" placeholder="12" min="1" max="12" value="12" inputmode="numeric"
+                style="border-radius:10px; border-left:1.5px solid #d4cec4;" />
+              <span style="font-size:13px;color:var(--text-muted);white-space:nowrap;">months / year</span>
+            </div>
+          </div>
+
+          <label class="reg-checkbox-row" style="margin-top:20px;">
+            <input type="checkbox" id="panIndiaCheck" />
+            <span>My business operates <strong>Pan-India</strong> (multiple states)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- RIGHT: Result panel -->
+      <div>
+        <div class="reg-result-panel" id="resultPanel">
+          <p class="reg-section-label">Estimated Annual Turnover</p>
+          <div class="reg-result-panel__amount" id="turnoverAmount">₹ —</div>
+          <div class="reg-result-panel__label" id="turnoverLabel">Enter your daily revenue to see your estimate</div>
+
+          <div id="tierBadge" style="display:none;"></div>
+
+          <!-- Temp license callout -->
+          <div class="reg-temp-panel" id="tempPanel" style="display:none;">
+            <div class="reg-temp-panel__title">✋ You qualify for Temporary / Basic Registration</div>
+            <p class="reg-temp-panel__sub">Your turnover is below ₹10 Lakh — this qualifies for a basic registration at no fee. No physical inspection needed.</p>
+            <div class="reg-temp-panel__btns">
+              <button class="reg-btn-outline" id="btnTempLicense">Get Basic License →</button>
+              <button class="reg-btn-outline" id="btnTempLearnMore">Learn More</button>
+            </div>
+          </div>
+
+          <!-- License tiers at a glance -->
+          <div class="reg-tiers-glance" id="tiersGlance" style="display:none;">
+            <p class="reg-tier-heading">License Tiers at a Glance</p>
+            <div class="reg-tier-row" id="tier-basic">
+              <span>Temporary / Basic Registration</span>
+              <span class="tier-fee">₹0 / yr &nbsp;·&nbsp; &lt;₹10 L</span>
+            </div>
+            <div class="reg-tier-row" id="tier-state-basic">
+              <span>Basic Registration</span>
+              <span class="tier-fee">₹100 / yr &nbsp;·&nbsp; ₹10 L–₹1.5 Cr</span>
+            </div>
+            <div class="reg-tier-row" id="tier-state">
+              <span>State License</span>
+              <span class="tier-fee">₹2,000 / yr &nbsp;·&nbsp; ₹1.5–₹20 Cr</span>
+            </div>
+            <div class="reg-tier-row" id="tier-central">
+              <span>Central License</span>
+              <span class="tier-fee">₹7,500 / yr &nbsp;·&nbsp; &gt;₹20 Cr</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="reg-error" id="scaleError"></p>
+        <button class="reg-btn-cta" id="scaleContinueBtn" style="margin-top:20px;width:100%;">
+          Let's proceed with the license →
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/scale.js') }}"></script>
+{% endblock %}

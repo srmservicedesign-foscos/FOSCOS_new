@@ -1,0 +1,114 @@
+{% extends "_base.html" %}
+{% block title %}License Issued — Instant Temporary License{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tl_flow.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="tl-rail">
+  <div class="tl-rail__inner">
+    <span class="tl-rail__tab done">INFO</span>
+    <span class="tl-rail__tab done">LOCATION</span>
+    <span class="tl-rail__tab done">DOCS</span>
+    <span class="tl-rail__tab done">FOOD</span>
+    <span class="tl-rail__tab done">RULES</span>
+    <span class="tl-rail__tab done">LICENSE</span>
+    <span class="tl-rail__tab active">FOSTAC</span>
+    <span class="tl-rail__tab">UPGRADE</span>
+  </div>
+</div>
+
+<div class="tl-page">
+  <div class="tl-container">
+
+    <div class="tl-step-header">
+      <a href="/" class="tl-back">🏠 Home</a>
+      <span class="tl-step-badge tl-step-badge--amber">🎉 Step 7 of 8 — Issued</span>
+    </div>
+
+    <h1 class="tl-title">Your License is Live! 🎉</h1>
+    <p class="tl-subtitle">Your Temporary Food Business License has been issued. You may begin operations immediately.</p>
+
+    <!-- License card -->
+    <div class="tl-license-card">
+      <div class="tl-license-card__header">
+        <div>
+          <div class="tl-license-card__issuer">FSSAI · Food Safety and Standards Authority of India</div>
+          <div class="tl-license-card__type">Temporary Food Business License</div>
+        </div>
+        <div class="tl-license-badge tl-license-badge--active">ACTIVE</div>
+      </div>
+
+      <div class="tl-license-card__number" id="issuedLicenseNo">TL-2026-···-······</div>
+      <div class="tl-license-card__biz" id="issuedBizName">—</div>
+
+      <div class="tl-license-card__footer">
+        <div>
+          <div class="tl-license-card__meta-label">Issued</div>
+          <div class="tl-license-card__meta-val" id="issuedDate">—</div>
+        </div>
+        <div>
+          <div class="tl-license-card__meta-label">Valid Until</div>
+          <div class="tl-license-card__meta-val" id="issuedExpiry">—</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="tl-license-card__meta-label">Days Left</div>
+          <div class="tl-license-card__days" id="issuedDaysLeft">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What to do next -->
+    <div class="tl-card">
+      <div class="tl-question" style="margin-bottom:14px;">Complete within your validity period</div>
+
+      <div class="tl-next-list">
+        <div class="tl-next-item" onclick="window.location.href='/temp-license/next-steps?tab=water'">
+          <div class="tl-next-item__left">
+            <div class="tl-next-item__icon">🧪</div>
+            <div>
+              <div class="tl-next-item__title">Water Quality Report</div>
+              <div class="tl-next-item__sub">Submit a lab-certified water quality test</div>
+            </div>
+          </div>
+          <div class="tl-next-item__arrow">›</div>
+        </div>
+
+        <div class="tl-next-item" onclick="window.location.href='/temp-license/next-steps?tab=fostac'">
+          <div class="tl-next-item__left">
+            <div class="tl-next-item__icon">📚</div>
+            <div>
+              <div class="tl-next-item__title">FoSTaC Food Safety Training</div>
+              <div class="tl-next-item__sub">Complete a certified online/offline session</div>
+            </div>
+          </div>
+          <div class="tl-next-item__arrow">›</div>
+        </div>
+
+        <div class="tl-next-item" onclick="window.location.href='/temp-license/next-steps?tab=inspection'">
+          <div class="tl-next-item__left">
+            <div class="tl-next-item__icon">🔍</div>
+            <div>
+              <div class="tl-next-item__title">Premise Inspection</div>
+              <div class="tl-next-item__sub">Schedule an FSSAI officer inspection</div>
+            </div>
+          </div>
+          <div class="tl-next-item__arrow">›</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-btn-row">
+      <button class="tl-btn-ghost" id="downloadBtn">⬇ Download License</button>
+      <a href="/temp-license/next-steps" class="tl-btn-primary" style="text-align:center;">View Steps →</a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/tl_issued.js') }}"></script>
+{% endblock %}
