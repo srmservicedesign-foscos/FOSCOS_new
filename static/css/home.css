@@ -1,0 +1,236 @@
+/* ============================================================
+   HOME PAGE CSS — Hero · Services · Updates
+   ============================================================ */
+
+/* ── HERO ────────────────────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(to right, rgba(5,12,28,0.93) 0%, rgba(5,12,28,0.80) 45%, rgba(5,12,28,0.50) 100%),
+    url('/static/images/hero.jpeg') center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + 64px) 80px 80px;
+  gap: 64px;
+}
+
+.hero__content {
+  flex: 1;
+  max-width: 560px;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 100px;
+  padding: 6px 16px;
+  margin-bottom: 28px;
+}
+.hero__badge .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%; background: #4ade80;
+  flex-shrink: 0;
+}
+.hero__badge span {
+  color: rgba(255,255,255,0.82);
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 58px;
+  line-height: 1.12;
+  color: white;
+  margin-bottom: 20px;
+}
+.hero h1 .highlight {
+  color: var(--amber);
+  display: block;
+}
+
+.hero__sub {
+  color: rgba(255,255,255,0.72);
+  font-size: 17px;
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 460px;
+}
+
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--amber);
+  color: white;
+  border: none;
+  padding: 15px 28px;
+  border-radius: var(--r-lg);
+  font-size: 16px;
+  font-weight: 600;
+  transition: background .2s, transform .15s;
+  text-decoration: none;
+}
+.btn-hero:hover {
+  background: var(--amber-hover);
+  transform: translateY(-2px);
+}
+
+/* ── HERO VISUAL (right column) ──────────────────────────────── */
+.hero__visual {
+  flex-shrink: 0;
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-stat-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(12px);
+  border-radius: var(--r-lg);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.hero-stat-card__value {
+  font-family: var(--font-display);
+  font-size: 26px; font-weight: 700;
+  color: var(--amber);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.hero-stat-card__label {
+  font-size: 13px; color: rgba(255,255,255,0.70);
+  line-height: 1.4;
+}
+
+/* ── SERVICES ────────────────────────────────────────────────── */
+.services {
+  background: var(--cream);
+  padding: 88px 80px;
+}
+
+.section-tag {
+  display: inline-block;
+  color: var(--amber); font-size: 11.5px; font-weight: 700;
+  letter-spacing: 1.3px; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: 38px; color: var(--text-primary);
+  line-height: 1.2; margin-bottom: 8px;
+}
+.section-sub {
+  color: var(--text-muted); font-size: 15.5px;
+  margin-bottom: 48px;
+}
+
+/* 4-col grid; last 2 items occupy cols 1–2 of row 2 naturally */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  padding: 28px 24px;
+  border: 1px solid rgba(0,0,0,0.06);
+  display: flex; flex-direction: column;
+  transition: transform .2s, box-shadow .2s;
+  text-decoration: none; color: inherit;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+.card--highlight {
+  background: var(--card-green);
+  border-color: var(--card-green-bd);
+}
+
+.card__icon {
+  width: 48px; height: 48px; border-radius: 10px;
+  background: var(--cream); border: 1px solid rgba(0,0,0,0.06);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 22px; flex-shrink: 0;
+}
+.card__icon--amber {
+  background: var(--amber); border-color: var(--amber);
+}
+.card--highlight .card__icon { background: rgba(255,255,255,0.65); border-color: var(--card-green-bd); }
+
+.card h3 { font-size: 16.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+.card p  { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; flex: 1; margin-bottom: 20px; }
+
+.card__cta {
+  color: var(--amber); font-size: 13.5px; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 4px;
+  transition: gap .18s;
+}
+.card:hover .card__cta { gap: 8px; }
+
+/* ── UPDATES ─────────────────────────────────────────────────── */
+.updates {
+  background: var(--navy);
+  padding: 80px 80px;
+}
+
+.updates__head {
+  display: flex; align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 16px;
+}
+.updates__head-left { display: flex; flex-direction: column; }
+.updates__head-left .section-heading { color: white; margin-bottom: 0; }
+
+.btn-view-all {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.85); padding: 10px 20px;
+  border-radius: var(--r); font-size: 13.5px; font-weight: 500;
+  white-space: nowrap; margin-bottom: 4px;
+  transition: background .2s;
+  text-decoration: none;
+}
+.btn-view-all:hover { background: rgba(255,255,255,0.14); }
+
+.updates-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.update-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--r-lg); padding: 28px 24px;
+  transition: background .2s;
+  text-decoration: none;
+  display: block;
+}
+.update-card:hover { background: rgba(255,255,255,0.10); }
+
+.update-card__type {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 1.3px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 14px;
+}
+.update-card h4 {
+  color: white; font-size: 15.5px; font-weight: 600;
+  line-height: 1.5; margin-bottom: 18px;
+}
+.update-card__date {
+  color: rgba(255,255,255,0.38); font-size: 13px;
+}
